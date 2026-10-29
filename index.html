@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schola Latina - 1º Bachillerato (Edición Completa)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Classical Roman Aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crimson: {
+                            800: '#8b1212',
+                            900: '#701010',
+                            950: '#4a0808',
+                        },
+                        gold: {
+                            400: '#facc15',
+                            500: '#d4af37',
+                            600: '#b8860b',
+                            700: '#946800',
+                        },
+                        parchment: {
+                            50: '#fdfbf7',
+                            100: '#f7f2e7',
+                            200: '#eee4d0',
+                            300: '#e0cfb3',
+                            800: '#3d3223',
+                            900: '#272016',
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f7f2e7;
+            background-image: radial-gradient(#e0cfb3 0.75px, transparent 0.75px), radial-gradient(#e0cfb3 0.75px, #f7f2e7 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: #272016;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .roman-card {
+            background: #fdfbf7;
+            border: 2px solid #d4af37;
+            box-shadow: 0 10px 25px -5px rgba(112, 16, 16, 0.08), 0 8px 10px -6px rgba(184, 134, 11, 0.1);
+        }
+
+        .tab-active {
+            background-color: #701010;
+            color: #ffffff;
+            border-color: #d4af37;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #eee4d0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b8860b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #701010;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-crimson-900 text-parchment-100 border-b-4 border-gold-500 shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gold-500 text-crimson-900 flex items-center justify-center font-bold text-xl border-2 border-parchment-100 shadow">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+                <div>
+                    <h1 class="font-cinzel text-xl md:text-2xl font-bold tracking-wider text-gold-400">SCHOLA LATINA</h1>
+                    <p class="text-xs text-parchment-300">1º de Bachillerato • Sustantivos, Adjetivos, Pronombres y Verbos</p>
+                </div>
+            </div>
+
+            <!-- Controls & Sound Toggle -->
+            <div class="flex items-center space-x-4">
+                <button id="soundToggleBtn" onclick="toggleSound()" class="p-2 text-gold-400 hover:text-white transition" title="Activar/Desactivar Sonido">
+                    <i id="soundIcon" class="fa-solid fa-volume-high text-lg"></i>
+                </button>
+                <div class="hidden sm:flex items-center bg-crimson-950 px-3 py-1.5 rounded-full border border-gold-600/50 text-xs text-gold-400 font-cinzel">
+                    <i class="fa-solid fa-award mr-2"></i>
+                    <span>S.P.Q.R. Grammaticus</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-crimson-950 px-4 border-t border-crimson-800">
+            <div class="max-w-7xl mx-auto flex overflow-x-auto space-x-2 py-2 text-sm font-cinzel">
+                <button id="tab-practice" onclick="switchTab('practice')" class="px-4 py-2 rounded-lg font-bold border border-transparent transition flex items-center gap-2 whitespace-nowrap tab-active">
+                    <i class="fa-solid fa-pen-nib"></i> Práctica Interactiva
+                </button>
+                <button id="tab-exam" onclick="switchTab('exam')" class="px-4 py-2 rounded-lg font-bold border border-transparent transition flex items-center gap-2 whitespace-nowrap text-parchment-200 hover:bg-crimson-900">
+                    <i class="fa-solid fa-scroll"></i> Examen 200 Formas
+                </button>
+                <button id="tab-grammar" onclick="switchTab('grammar')" class="px-4 py-2 rounded-lg font-bold border border-transparent transition flex items-center gap-2 whitespace-nowrap text-parchment-200 hover:bg-crimson-900">
+                    <i class="fa-solid fa-book-bookmark"></i> Tablas Gramaticales
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-grow">
+
+        <!-- SECTION 1: MODO PRÁCTICA INTERACTIVA -->
+        <section id="section-practice" class="space-y-6">
+            <!-- Practice Settings Banner -->
+            <div class="roman-card rounded-xl p-4 md:p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                    <!-- Category Filter -->
+                    <div>
+                        <label class="block text-xs font-bold text-parchment-800 uppercase tracking-wider mb-2">
+                            <i class="fa-solid fa-filter text-gold-600 mr-1"></i> Categoría Gramatical
+                        </label>
+                        <select id="practice-topic" onchange="updatePracticeFilters()" class="w-full bg-parchment-50 border-2 border-gold-500 rounded-lg p-2 text-sm font-semibold text-parchment-900 focus:outline-none focus:ring-2 focus:ring-crimson-900">
+                            <option value="all">Todas las Categorías (Mezclado)</option>
+                            <option value="sust">Sustantivos (1ª-5ª Declinación)</option>
+                            <option value="adj">Adjetivos (1ª y 2ª Clase)</option>
+                            <option value="pron">Pronombres (Demostrativos, Fóricos, Relativo)</option>
+                            <option value="verb">Verbos (Activa/Pasiva • Ind/Subj)</option>
+                        </select>
+                    </div>
+
+                    <!-- Level Filter -->
+                    <div>
+                        <label class="block text-xs font-bold text-parchment-800 uppercase tracking-wider mb-2">
+                            <i class="fa-solid fa-layer-group text-gold-600 mr-1"></i> Nivel de Dificultad
+                        </label>
+                        <select id="practice-level" onchange="updatePracticeFilters()" class="w-full bg-parchment-50 border-2 border-gold-500 rounded-lg p-2 text-sm font-semibold text-parchment-900 focus:outline-none focus:ring-2 focus:ring-crimson-900">
+                            <option value="all">Todos los Niveles</option>
+                            <option value="1">Nivel 1: Básico (1ª/2ª Decl, Adj 1ª Cl, Pres/Impf Ind Act)</option>
+                            <option value="2">Nivel 2: Intermedio (3ª Decl, Adj 2ª Cl, Demost/Fóricos, Perf/Fut/Plusq Ind)</option>
+                            <option value="3">Nivel 3: Avanzado (4ª/5ª Decl, Relativo, Pasiva Completa, Subjuntivo)</option>
+                        </select>
+                    </div>
+
+                    <!-- Answer Mode Switch -->
+                    <div>
+                        <label class="block text-xs font-bold text-parchment-800 uppercase tracking-wider mb-2">
+                            <i class="fa-solid fa-gamepad text-gold-600 mr-1"></i> Tipo de Ejercicio
+                        </label>
+                        <div class="flex bg-parchment-200 p-1 rounded-lg border border-gold-500">
+                            <button id="fmt-write" onclick="setFormat('write')" class="flex-1 py-1.5 text-xs font-bold rounded-md bg-crimson-900 text-white transition">Escritura</button>
+                            <button id="fmt-choice" onclick="setFormat('choice')" class="flex-1 py-1.5 text-xs font-bold rounded-md text-parchment-800 transition">Opción Múltiple</button>
+                            <button id="fmt-inverse" onclick="setFormat('inverse')" class="flex-1 py-1.5 text-xs font-bold rounded-md text-parchment-800 transition">Análisis Inverso</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scoreboard -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="roman-card rounded-lg p-3 text-center">
+                    <span class="block text-xs font-bold text-gray-500 uppercase">Aciertos</span>
+                    <span id="practice-score" class="text-2xl font-black text-emerald-700">0</span>
+                </div>
+                <div class="roman-card rounded-lg p-3 text-center">
+                    <span class="block text-xs font-bold text-gray-500 uppercase">Racha</span>
+                    <span id="practice-streak" class="text-2xl font-black text-amber-600">0 🔥</span>
+                </div>
+                <div class="roman-card rounded-lg p-3 text-center">
+                    <span class="block text-xs font-bold text-gray-500 uppercase">Fallos</span>
+                    <span id="practice-errors" class="text-2xl font-black text-rose-700">0</span>
+                </div>
+                <div class="roman-card rounded-lg p-3 text-center">
+                    <span class="block text-xs font-bold text-gray-500 uppercase">Precisión</span>
+                    <span id="practice-accuracy" class="text-2xl font-black text-crimson-900">100%</span>
+                </div>
+            </div>
+
+            <!-- Practice Question Card -->
+            <div class="roman-card rounded-2xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-gold-600 via-crimson-900 to-gold-600"></div>
+
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span id="question-badge" class="px-3 py-1 bg-gold-500/20 text-gold-700 border border-gold-500 rounded-full text-xs font-bold uppercase tracking-wider">
+                            Sustantivo
+                        </span>
+                        <button onclick="togglePracticeHint()" class="text-xs font-semibold text-crimson-900 hover:underline flex items-center gap-1">
+                            <i class="fa-regular fa-lightbulb text-gold-600"></i> <span id="hint-btn-text">Ver pista gramatical</span>
+                        </button>
+                    </div>
+
+                    <h2 id="question-prompt" class="text-xl md:text-2xl font-bold text-parchment-900 font-cinzel leading-relaxed">
+                        Cargando pregunta...
+                    </h2>
+
+                    <!-- Hint Drawer -->
+                    <div id="practice-hint-box" class="hidden mt-3 p-3 bg-amber-50 border-l-4 border-amber-500 text-amber-900 text-sm rounded">
+                        <i class="fa-solid fa-circle-info mr-1"></i> <span id="hint-text">Pista...</span>
+                    </div>
+                </div>
+
+                <!-- Answer Input Container -->
+                <div id="answer-container" class="space-y-4">
+                    <!-- Text Fill-in Mode -->
+                    <div id="mode-text-input" class="space-y-3">
+                        <div class="flex gap-2">
+                            <input type="text" id="practice-input" placeholder="Escribe tu respuesta aquí (ej. rosae)..." autofocus autocomplete="off" autocorrect="off" autocapitalize="off" class="w-full bg-white border-2 border-gold-500 rounded-xl px-4 py-3 text-lg font-medium text-parchment-900 focus:outline-none focus:ring-2 focus:ring-crimson-900 shadow-inner">
+                            <button id="submit-btn" onclick="checkPracticeAnswer()" class="px-6 py-3 bg-crimson-900 hover:bg-crimson-950 text-gold-400 font-cinzel font-bold text-lg rounded-xl shadow-md transition flex items-center gap-2">
+                                <span>Verificar</span>
+                                <i class="fa-solid fa-circle-check"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500 italic">Presiona <kbd class="px-1.5 py-0.5 bg-parchment-200 border rounded text-xs font-mono">Enter</kbd> para comprobar.</p>
+                    </div>
+
+                    <!-- Multiple Choice Mode -->
+                    <div id="mode-choice-input" class="hidden grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+                </div>
+
+                <!-- Feedback Box -->
+                <div id="feedback-box" class="hidden mt-6 p-4 rounded-xl border-2 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div id="feedback-icon" class="text-2xl"></div>
+                        <div class="flex-grow">
+                            <h4 id="feedback-title" class="font-bold font-cinzel text-lg"></h4>
+                            <p id="feedback-detail" class="text-sm mt-1"></p>
+                        </div>
+                        <button onclick="nextPracticeQuestion()" class="px-4 py-2 bg-crimson-900 text-white font-cinzel font-bold rounded-lg shadow hover:bg-crimson-950 transition text-sm">
+                            Siguiente <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MODO EXAMEN DE 200 FORMAS -->
+        <section id="section-exam" class="hidden space-y-6">
+            <!-- Exam Header Box -->
+            <div class="roman-card rounded-2xl p-6 border-2 border-gold-500">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="px-3 py-1 bg-crimson-900 text-gold-400 font-bold font-cinzel text-xs rounded-full uppercase tracking-widest">
+                            Examen Oficial de Latín 1º Bachillerato
+                        </span>
+                        <h2 class="text-2xl font-bold font-cinzel text-crimson-900 mt-2">Prueba Magna de 200 Formas Morfológicas</h2>
+                        <p class="text-sm text-parchment-800">Sustantivos, Adjetivos (1ª y 2ª clase), Pronombres y Verbos completos (Activa y Pasiva).</p>
+                    </div>
+
+                    <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+                        <div class="bg-parchment-100 border border-gold-500 px-4 py-2 rounded-xl text-center">
+                            <span class="block text-xs font-bold text-gray-500 uppercase">Tiempo</span>
+                            <span id="exam-timer" class="font-mono text-xl font-bold text-crimson-900">60:00</span>
+                        </div>
+                        <div class="bg-parchment-100 border border-gold-500 px-4 py-2 rounded-xl text-center">
+                            <span class="block text-xs font-bold text-gray-500 uppercase">Progreso</span>
+                            <span id="exam-progress-counter" class="font-bold text-xl text-parchment-900">0 / 200</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 200 Questions Grid Pagination Controls -->
+                <div class="mt-6 pt-4 border-t border-gold-300">
+                    <div class="flex flex-wrap justify-between items-center gap-2 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-parchment-800">Navegador de Preguntas (Agrupadas de 20 en 20):</span>
+                        <div id="exam-page-selector" class="flex flex-wrap gap-1"></div>
+                    </div>
+
+                    <div id="exam-grid" class="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto p-1 bg-parchment-50 rounded-lg border border-gold-300"></div>
+                </div>
+            </div>
+
+            <!-- Active Exam Question Card -->
+            <div id="exam-active-card" class="roman-card rounded-2xl p-6 md:p-8">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="exam-q-number" class="text-sm font-bold font-cinzel text-crimson-900 bg-gold-500/20 px-3 py-1 rounded-full border border-gold-500">
+                        Pregunta 1 de 200
+                    </span>
+                    <span id="exam-q-type" class="text-xs font-semibold text-gray-500 uppercase">Sustantivo</span>
+                </div>
+
+                <h3 id="exam-q-text" class="text-xl md:text-2xl font-bold text-parchment-900 font-cinzel mb-6 leading-relaxed">
+                    1. Nominativo plural de rosa, -ae:
+                </h3>
+
+                <div class="space-y-4">
+                    <input type="text" id="exam-answer-input" placeholder="Escribe la respuesta latina exacta..." autocomplete="off" autocorrect="off" autocapitalize="off" class="w-full bg-white border-2 border-gold-500 rounded-xl px-4 py-3 text-lg font-medium text-parchment-900 focus:outline-none focus:ring-2 focus:ring-crimson-900 shadow-inner">
+
+                    <div class="flex justify-between items-center pt-4">
+                        <button id="exam-prev-btn" onclick="navExamQuestion(-1)" class="px-4 py-2 bg-parchment-200 hover:bg-parchment-300 text-parchment-900 font-bold rounded-lg transition text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-chevron-left"></i> Anterior
+                        </button>
+
+                        <button id="exam-next-btn" onclick="navExamQuestion(1)" class="px-6 py-2.5 bg-crimson-900 hover:bg-crimson-950 text-gold-400 font-cinzel font-bold rounded-lg shadow transition text-sm flex items-center gap-2">
+                            Siguiente <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exam Action Bar -->
+            <div class="flex justify-end gap-3">
+                <button onclick="confirmFinishExam()" class="px-8 py-3 bg-emerald-800 hover:bg-emerald-900 text-white font-cinzel font-bold text-lg rounded-xl shadow-lg transition flex items-center gap-2">
+                    <i class="fa-solid fa-flag-checkered"></i> Entregar Examen Definitive
+                </button>
+            </div>
+
+            <!-- Exam Results Report -->
+            <div id="exam-results-panel" class="hidden roman-card rounded-2xl p-6 md:p-8 border-4 border-gold-500">
+                <div class="text-center mb-8 pb-6 border-b border-gold-300">
+                    <div id="exam-badge-icon" class="w-20 h-20 mx-auto rounded-full bg-gold-500 text-crimson-900 flex items-center justify-center text-3xl font-black mb-3 border-2 border-parchment-100 shadow-lg">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <h3 id="exam-rank-title" class="text-2xl font-bold font-cinzel text-crimson-900">IMPERATOR LATINITATIS</h3>
+                    <p class="text-sm text-gray-600 mt-1">Informe Final de Evaluación de 200 Formas</p>
+
+                    <div class="inline-flex items-baseline gap-2 mt-4 bg-parchment-100 border border-gold-500 px-6 py-3 rounded-2xl">
+                        <span id="exam-score-num" class="text-4xl font-black text-crimson-900">180</span>
+                        <span class="text-xl text-gray-500 font-bold">/ 200</span>
+                        <span id="exam-score-grade" class="ml-3 text-lg font-bold px-3 py-1 rounded bg-emerald-100 text-emerald-800">Nota: 9.00 / 10</span>
+                    </div>
+
+                    <!-- Breakdown by Categories -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6 text-xs text-left">
+                        <div class="p-3 bg-white border rounded-lg text-center">
+                            <span class="block font-bold text-gray-500">Sustantivos</span>
+                            <span id="cat-score-sust" class="text-base font-bold text-crimson-900">-</span>
+                        </div>
+                        <div class="p-3 bg-white border rounded-lg text-center">
+                            <span class="block font-bold text-gray-500">Adjetivos</span>
+                            <span id="cat-score-adj" class="text-base font-bold text-crimson-900">-</span>
+                        </div>
+                        <div class="p-3 bg-white border rounded-lg text-center">
+                            <span class="block font-bold text-gray-500">Pronombres</span>
+                            <span id="cat-score-pron" class="text-base font-bold text-crimson-900">-</span>
+                        </div>
+                        <div class="p-3 bg-white border rounded-lg text-center">
+                            <span class="block font-bold text-gray-500">Verbos</span>
+                            <span id="cat-score-verb" class="text-base font-bold text-crimson-900">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="font-cinzel font-bold text-lg text-parchment-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-gold-600"></i> Desglose Detallado Ítem por Ítem
+                </h4>
+                <div id="exam-breakdown-list" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div>
+
+                <div class="mt-8 flex justify-center gap-4">
+                    <button onclick="resetAndStartExam()" class="px-6 py-3 bg-crimson-900 hover:bg-crimson-950 text-gold-400 font-cinzel font-bold rounded-xl shadow transition">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> Repetir Examen
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TABLAS GRAMATICALES DE REFERENCIA COMPLETAS -->
+        <section id="section-grammar" class="hidden space-y-6">
+            <div class="roman-card rounded-2xl p-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold font-cinzel text-crimson-900 flex items-center gap-2">
+                            <i class="fa-solid fa-book-open text-gold-600"></i> Compendio Gramatical de 1º de Bachillerato
+                        </h2>
+                        <p class="text-sm text-parchment-800">Paradigmas completos de Sustantivos, Adjetivos, Pronombres y Verbos (Activa y Pasiva • Indicativo y Subjuntivo).</p>
+                    </div>
+
+                    <!-- Fast Search Input -->
+                    <div class="relative w-full md:w-64">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gold-600 text-sm"></i>
+                        <input type="text" id="grammar-search-input" onkeyup="filterGrammarTables()" placeholder="Buscar forma o término..." class="w-full bg-white border-2 border-gold-500 rounded-lg pl-9 pr-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-crimson-900">
+                    </div>
+                </div>
+
+                <!-- Grammar Category Tabs -->
+                <div class="flex border-b border-gold-300 mb-6 space-x-2 overflow-x-auto">
+                    <button onclick="switchGrammarTab('sust')" id="gtab-sust" class="px-4 py-2 font-cinzel font-bold text-sm border-b-2 border-crimson-900 text-crimson-900 whitespace-nowrap">1. Sustantivos</button>
+                    <button onclick="switchGrammarTab('adj')" id="gtab-adj" class="px-4 py-2 font-cinzel font-bold text-sm text-gray-500 border-b-2 border-transparent hover:text-crimson-900 whitespace-nowrap">2. Adjetivos (1ª y 2ª Cl.)</button>
+                    <button onclick="switchGrammarTab('pron')" id="gtab-pron" class="px-4 py-2 font-cinzel font-bold text-sm text-gray-500 border-b-2 border-transparent hover:text-crimson-900 whitespace-nowrap">3. Pronombres</button>
+                    <button onclick="switchGrammarTab('verb')" id="gtab-verb" class="px-4 py-2 font-cinzel font-bold text-sm text-gray-500 border-b-2 border-transparent hover:text-crimson-900 whitespace-nowrap">4. Verbos (Completo)</button>
+                </div>
+
+                <!-- VIEW 1: SUSTANTIVOS -->
+                <div id="gview-sust" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 text-center border-b pb-2 mb-3">1ª Declinación (rosa, -ae)</h4>
+                            <table class="w-full text-xs text-left font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>Singular</th><th>Plural</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom.</td><td>rosa</td><td>rosae</td></tr>
+                                    <tr><td>Voc.</td><td>rosa</td><td>rosae</td></tr>
+                                    <tr><td>Ac.</td><td>rosam</td><td>rosas</td></tr>
+                                    <tr><td>Gen.</td><td>rosae</td><td>rosarum</td></tr>
+                                    <tr><td>Dat.</td><td>rosae</td><td>rosis</td></tr>
+                                    <tr><td>Abl.</td><td>rosa</td><td>rosis</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 text-center border-b pb-2 mb-3">2ª Declinación (servus, -i / bellum, -i)</h4>
+                            <table class="w-full text-xs text-left font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>Masc Sg/Pl</th><th>Neut Sg/Pl</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom.</td><td>servus / servi</td><td>bellum / bella</td></tr>
+                                    <tr><td>Voc.</td><td>serve / servi</td><td>bellum / bella</td></tr>
+                                    <tr><td>Ac.</td><td>servum / servos</td><td>bellum / bella</td></tr>
+                                    <tr><td>Gen.</td><td>servi / servorum</td><td>belli / bellorum</td></tr>
+                                    <tr><td>Dat.</td><td>servo / servis</td><td>bello / bellis</td></tr>
+                                    <tr><td>Abl.</td><td>servo / servis</td><td>bello / bellis</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 text-center border-b pb-2 mb-3">3ª Declinación (Consonante y T. en -I)</h4>
+                            <table class="w-full text-xs text-left font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>miles (Cons)</th><th>urbs / animal (-i)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom.</td><td>miles / milites</td><td>urbs / urbes | animal / animalia</td></tr>
+                                    <tr><td>Ac.</td><td>militem / milites</td><td>urbem / urbes | animal / animalia</td></tr>
+                                    <tr><td>Gen.</td><td>militis / militum</td><td>urbis / urbium | animalis / animalium</td></tr>
+                                    <tr><td>Dat.</td><td>militi / militibus</td><td>urbi / urbibus | animali / animalibus</td></tr>
+                                    <tr><td>Abl.</td><td>milite / militibus</td><td>urbe / urbibus | animali / animalibus</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 text-center border-b pb-2 mb-3">4ª Declinación (manus, -us / cornu, -us)</h4>
+                            <table class="w-full text-xs text-left font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>Masc (manus)</th><th>Neutro (cornu)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom.</td><td>manus / manus</td><td>cornu / cornua</td></tr>
+                                    <tr><td>Ac.</td><td>manum / manus</td><td>cornu / cornua</td></tr>
+                                    <tr><td>Gen.</td><td>manus / manuum</td><td>cornus / cornuum</td></tr>
+                                    <tr><td>Dat.</td><td>manui / manibus</td><td>cornu / cornibus</td></tr>
+                                    <tr><td>Abl.</td><td>manu / manibus</td><td>cornu / cornibus</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 text-center border-b pb-2 mb-3">5ª Declinación (dies, diei / res, rei)</h4>
+                            <table class="w-full text-xs text-left font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>Singular</th><th>Plural</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom.</td><td>dies / res</td><td>dies / res</td></tr>
+                                    <tr><td>Ac.</td><td>diem / rem</td><td>dies / res</td></tr>
+                                    <tr><td>Gen.</td><td>diei / rei</td><td>dierum / rerum</td></tr>
+                                    <tr><td>Dat.</td><td>diei / rei</td><td>diebus / rebus</td></tr>
+                                    <tr><td>Abl.</td><td>die / re</td><td>diebus / rebus</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW 2: ADJETIVOS -->
+                <div id="gview-adj" class="hidden space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 border-b pb-2 mb-3">1ª Clase: 3 Terminaciones (-us/er, -a, -um)</h4>
+                            <p class="text-xs text-gray-600 mb-2">Modelos: <i>bonus, bona, bonum</i> y <i>pulcher, pulchra, pulchrum</i></p>
+                            <table class="w-full text-xs text-left font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>Masc (bonus)</th><th>Fem (bona)</th><th>Neut (bonum)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom. Sg.</td><td>bonus / pulcher</td><td>bona / pulchra</td><td>bonum / pulchrum</td></tr>
+                                    <tr><td>Ac. Sg.</td><td>bonum / pulchrum</td><td>bonam / pulchram</td><td>bonum / pulchrum</td></tr>
+                                    <tr><td>Gen. Sg.</td><td>boni / pulchri</td><td>bonae / pulchrae</td><td>boni / pulchri</td></tr>
+                                    <tr><td>Nom. Pl.</td><td>boni / pulchri</td><td>bonae / pulchrae</td><td>bona / pulchra</td></tr>
+                                    <tr><td>Gen. Pl.</td><td>bonorum / pulchrorum</td><td>bonarum / pulchrarum</td><td>bonorum / pulchrorum</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 border-b pb-2 mb-3">2ª Clase: Declinación por la 3ª Tema en -I</h4>
+                            <p class="text-xs text-gray-600 mb-2">3 Term: <i>acer, acris, acre</i> | 2 Term: <i>fortis, forte</i> | 1 Term: <i>ingens, -tis</i></p>
+                            <table class="w-full text-xs text-left font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>Masc/Fem</th><th>Neutro</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom Sg</td><td>acer / fortis / ingens</td><td>acre / forte / ingens</td></tr>
+                                    <tr><td>Ac Sg</td><td>acrem / fortem / ingentem</td><td>acre / forte / ingens</td></tr>
+                                    <tr><td>Gen Sg</td><td>acris / fortis / ingentis</td><td>acris / fortis / ingentis</td></tr>
+                                    <tr><td>Abl Sg</td><td>acri / forti / ingenti</td><td>acri / forti / ingenti</td></tr>
+                                    <tr><td>Nom Pl</td><td>acres / fortes / ingentes</td><td>acria / fortia / ingentia</td></tr>
+                                    <tr><td>Gen Pl</td><td>acrium / fortium / ingentium</td><td>acrium / fortium / ingentium</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW 3: PRONOMBRES -->
+                <div id="gview-pron" class="hidden space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Demostrativos -->
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 border-b pb-2 mb-2">Hic, Haec, Hoc (Este)</h4>
+                            <table class="w-full text-[11px] font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>Masc</th><th>Fem</th><th>Neut</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom Sg</td><td>hic</td><td>haec</td><td>hoc</td></tr>
+                                    <tr><td>Ac Sg</td><td>hunc</td><td>hanc</td><td>hoc</td></tr>
+                                    <tr><td>Gen Sg</td><td colspan="3" class="text-center">huius</td></tr>
+                                    <tr><td>Dat Sg</td><td colspan="3" class="text-center">huic</td></tr>
+                                    <tr><td>Nom Pl</td><td>hi</td><td>hae</td><td>haec</td></tr>
+                                    <tr><td>Gen Pl</td><td>horum</td><td>harum</td><td>horum</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 border-b pb-2 mb-2">Ille, Illa, Illud (Aquel)</h4>
+                            <table class="w-full text-[11px] font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>Masc</th><th>Fem</th><th>Neut</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom Sg</td><td>ille</td><td>illa</td><td>illud</td></tr>
+                                    <tr><td>Ac Sg</td><td>illum</td><td>illam</td><td>illud</td></tr>
+                                    <tr><td>Gen Sg</td><td colspan="3" class="text-center">illius</td></tr>
+                                    <tr><td>Dat Sg</td><td colspan="3" class="text-center">illi</td></tr>
+                                    <tr><td>Nom Pl</td><td>illi</td><td>illae</td><td>illa</td></tr>
+                                    <tr><td>Gen Pl</td><td>illorum</td><td>illarum</td><td>illorum</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Fóricos e Identidad -->
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm">
+                            <h4 class="font-cinzel font-bold text-crimson-900 border-b pb-2 mb-2">Is, Ea, Id (Él, este)</h4>
+                            <table class="w-full text-[11px] font-mono">
+                                <thead><tr class="bg-parchment-100"><th>Caso</th><th>Masc</th><th>Fem</th><th>Neut</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Nom Sg</td><td>is</td><td>ea</td><td>id</td></tr>
+                                    <tr><td>Ac Sg</td><td>eum</td><td>eam</td><td>id</td></tr>
+                                    <tr><td>Gen Sg</td><td colspan="3" class="text-center">eius</td></tr>
+                                    <tr><td>Dat Sg</td><td colspan="3" class="text-center">ei</td></tr>
+                                    <tr><td>Nom Pl</td><td>ii (ei)</td><td>eae</td><td>ea</td></tr>
+                                    <tr><td>Gen Pl</td><td>eorum</td><td>earum</td><td>eorum</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Relativo -->
+                        <div class="bg-white p-4 rounded-xl border border-gold-400 shadow-sm md:col-span-3">
+                            <h4 class="font-cinzel font-bold text-crimson-900 border-b pb-2 mb-2">Qui, Quae, Quod (El cual, que)</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <table class="w-full text-[11px] font-mono">
+                                    <thead><tr class="bg-parchment-100"><th colspan="4" class="text-center font-bold">Singular</th></tr><tr><th>Caso</th><th>Masc</th><th>Fem</th><th>Neut</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Nom.</td><td>qui</td><td>quae</td><td>quod</td></tr>
+                                        <tr><td>Ac.</td><td>quem</td><td>quam</td><td>quod</td></tr>
+                                        <tr><td>Gen.</td><td colspan="3" class="text-center">cuius</td></tr>
+                                        <tr><td>Dat.</td><td colspan="3" class="text-center">cui</td></tr>
+                                        <tr><td>Abl.</td><td>quo</td><td>qua</td><td>quo</td></tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="w-full text-[11px] font-mono">
+                                    <thead><tr class="bg-parchment-100"><th colspan="4" class="text-center font-bold">Plural</th></tr><tr><th>Caso</th><th>Masc</th><th>Fem</th><th>Neut</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Nom.</td><td>qui</td><td>quae</td><td>quae</td></tr>
+                                        <tr><td>Ac.</td><td>quos</td><td>quas</td><td>quae</td></tr>
+                                        <tr><td>Gen.</td><td>quorum</td><td>quarum</td><td>quorum</td></tr>
+                                        <tr><td>Dat./Abl.</td><td colspan="3" class="text-center">quibus</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW 4: VERBOS COMPLETO -->
+                <div id="gview-verb" class="hidden space-y-6">
+                    <div class="bg-parchment-100 p-4 rounded-xl border border-gold-500 mb-4 flex flex-wrap gap-3 items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <label class="font-bold text-xs font-cinzel text-crimson-900">Modelo:</label>
+                            <select id="verb-model-select" onchange="renderVerbTable()" class="bg-white border border-gold-500 rounded p-1 text-xs font-semibold">
+                                <option value="1">1ª Conj. (amo, -are)</option>
+                                <option value="2">2ª Conj. (moneo, -ere)</option>
+                                <option value="3">3ª Conj. (rego, -ere)</option>
+                                <option value="4">4ª Conj. (audio, -ire)</option>
+                                <option value="capio">Mixta (capio, -ere)</option>
+                                <option value="sum">Auxiliar (sum, esse)</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <label class="font-bold text-xs font-cinzel text-crimson-900">Voz:</label>
+                            <select id="verb-voice-select" onchange="renderVerbTable()" class="bg-white border border-gold-500 rounded p-1 text-xs font-semibold">
+                                <option value="act">Voz Activa</option>
+                                <option value="pas">Voz Pasiva</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <label class="font-bold text-xs font-cinzel text-crimson-900">Modo:</label>
+                            <select id="verb-mood-select" onchange="renderVerbTable()" class="bg-white border border-gold-500 rounded p-1 text-xs font-semibold">
+                                <option value="ind">Indicativo (6 Tiempos)</option>
+                                <option value="subj">Subjuntivo (4 Tiempos)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Verb Output Container -->
+                    <div id="verb-paradigm-output" class="bg-white p-4 rounded-xl border border-gold-400 overflow-x-auto"></div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-crimson-950 text-parchment-300 py-4 border-t-2 border-gold-600 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="font-cinzel tracking-wide text-gold-400">SCHOLA LATINA • 1º BACHILLERATO</p>
+            <p class="mt-1 text-parchment-200">Plataforma integral de morfología latina • Sustantivos, Adjetivos, Pronombres y Verbos completos.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        /* ==========================================================================
+           1. DATA BANK: 200 STRUCTURED QUESTIONS
+           ========================================================================== */
+
+        const QUESTION_BANK_200 = [
+            // SUSTANTIVOS (1-50)
+            { id: 1, prompt: "1. Nominativo plural de rosa, -ae:", ans: "rosae", cat: "sust", level: 1, hint: "1ª declinación femenino nom. pl. (-ae)" },
+            { id: 2, prompt: "2. Acusativo plural de urbs, urbis:", ans: "urbes", cat: "sust", level: 2, hint: "3ª declinación tema en -i ac. pl. (-es)" },
+            { id: 3, prompt: "3. Vocativo singular de servus, -i:", ans: "serve", cat: "sust", level: 1, hint: "2ª declinación voc. sg. en -e" },
+            { id: 4, prompt: "4. Vocativo plural de dominus, -i:", ans: "domini", cat: "sust", level: 1, hint: "2ª declinación voc. pl. (-i igual a nom)" },
+            { id: 5, prompt: "5. Dativo plural de poeta, -ae:", ans: "poetis", cat: "sust", level: 1, hint: "1ª declinación dat. pl. (-is)" },
+            { id: 6, prompt: "6. Genitivo singular de puella, -ae:", ans: "puellae", cat: "sust", level: 1, hint: "1ª declinación gen. sg. (-ae)" },
+            { id: 7, prompt: "7. Genitivo singular de pater, patris:", ans: "patris", cat: "sust", level: 2, hint: "3ª declinación consonante gen. sg. (-is)" },
+            { id: 8, prompt: "8. Ablativo singular de manus, -us:", ans: "manu", cat: "sust", level: 3, hint: "4ª declinación ablativo sg. (-u)" },
+            { id: 9, prompt: "9. Dativo plural de puella, -ae:", ans: "puellis", cat: "sust", level: 1, hint: "1ª declinación dat. pl. (-is)" },
+            { id: 10, prompt: "10. Nominativo singular de cornu, -us:", ans: "cornu", cat: "sust", level: 3, hint: "4ª declinación neutra nom. sg. (-u)" },
+            { id: 11, prompt: "11. Vocativo plural de filius, -i:", ans: "filii", cat: "sust", level: 1, hint: "2ª declinación voc. pl. (-ii)" },
+            { id: 12, prompt: "12. Acusativo singular de nomen, -inis:", ans: "nomen", cat: "sust", level: 2, hint: "3ª declinación neutra acusativo sg. (igual a nom)" },
+            { id: 13, prompt: "13. Ablativo plural de animal, animalis:", ans: "animalibus", cat: "sust", level: 2, hint: "3ª declinación neutro en -i abl. pl. (-ibus)" },
+            { id: 14, prompt: "14. Dativo singular de rex, regis:", ans: "regi", cat: "sust", level: 2, hint: "3ª declinación dat. sg. (-i)" },
+            { id: 15, prompt: "15. Ablativo singular de bellum, -i:", ans: "bello", cat: "sust", level: 1, hint: "2ª declinación neutra abl. sg. (-o)" },
+            { id: 16, prompt: "16. Acusativo plural de miles, militis:", ans: "milites", cat: "sust", level: 2, hint: "3ª declinación ac. pl. (-es)" },
+            { id: 17, prompt: "17. Ablativo plural de poeta, -ae:", ans: "poetis", cat: "sust", level: 1, hint: "1ª declinación abl. pl. (-is)" },
+            { id: 18, prompt: "18. Nominativo singular de agricola, -ae:", ans: "agricola", cat: "sust", level: 1, hint: "1ª declinación masculino (-a)" },
+            { id: 19, prompt: "19. Genitivo plural de civitas, civitatis:", ans: "civitatum", cat: "sust", level: 2, hint: "3ª declinación consonante gen. pl. (-um)" },
+            { id: 20, prompt: "20. Dativo plural de rex, regis:", ans: "regibus", cat: "sust", level: 2, hint: "3ª declinación dat. pl. (-ibus)" },
+            { id: 21, prompt: "21. Nominativo plural de bellum, -i:", ans: "bella", cat: "sust", level: 1, hint: "2ª declinación neutra nom. pl. (-a)" },
+            { id: 22, prompt: "22. Genitivo singular de senatus, -us:", ans: "senatus", cat: "sust", level: 3, hint: "4ª declinación gen. sg. (-us)" },
+            { id: 23, prompt: "23. Ablativo plural de corpus, corporis:", ans: "corporibus", cat: "sust", level: 2, hint: "3ª declinación neutra abl. pl. (-ibus)" },
+            { id: 24, prompt: "24. Ablativo singular de dies, diei:", ans: "die", cat: "sust", level: 3, hint: "5ª declinación abl. sg. (-e)" },
+            { id: 25, prompt: "25. Dativo singular de templum, -i:", ans: "templo", cat: "sust", level: 1, hint: "2ª declinación neutra dat. sg. (-o)" },
+            { id: 26, prompt: "26. Genitivo plural de cornu, -us:", ans: "cornuum", cat: "sust", level: 3, hint: "4ª declinación gen. pl. (-uum)" },
+            { id: 27, prompt: "27. Dativo plural de mater, matris:", ans: "matribus", cat: "sust", level: 2, hint: "3ª declinación dat. pl. (-ibus)" },
+            { id: 28, prompt: "28. Nominativo plural de manus, -us:", ans: "manus", cat: "sust", level: 3, hint: "4ª declinación nom. pl. (-us)" },
+            { id: 29, prompt: "29. Acusativo plural de dominus, -i:", ans: "dominos", cat: "sust", level: 1, hint: "2ª declinación ac. pl. (-os)" },
+            { id: 30, prompt: "30. Acusativo singular de consul, consulis:", ans: "consulem", cat: "sust", level: 2, hint: "3ª declinación ac. sg. (-em)" },
+            { id: 31, prompt: "31. Ablativo plural de fructus, -us:", ans: "fructibus", cat: "sust", level: 3, hint: "4ª declinación abl. pl. (-ibus)" },
+            { id: 32, prompt: "32. Genitivo plural de nomen, nominis:", ans: "nominum", cat: "sust", level: 2, hint: "3ª declinación neutra gen. pl. (-um)" },
+            { id: 33, prompt: "33. Genitivo plural de res, rei:", ans: "rerum", cat: "sust", level: 3, hint: "5ª declinación gen. pl. (-erum)" },
+            { id: 34, prompt: "34. Dativo singular de spes, spei:", ans: "spei", cat: "sust", level: 3, hint: "5ª declinación dat. sg. (-ei)" },
+            { id: 35, prompt: "35. Acusativo singular de mare, maris:", ans: "mare", cat: "sust", level: 2, hint: "3ª declinación neutro en -i ac. sg. (igual a nom)" },
+            { id: 36, prompt: "36. Acusativo plural de templum, -i:", ans: "templa", cat: "sust", level: 1, hint: "2ª declinación neutra ac. pl. (-a)" },
+            { id: 37, prompt: "37. Genitivo singular de dies, diei:", ans: "diei", cat: "sust", level: 3, hint: "5ª declinación gen. sg. (-ei)" },
+            { id: 38, prompt: "38. Vocativo singular de filius, -i:", ans: "fili", altAns: ["filii"], cat: "sust", level: 1, hint: "Excepción 2ª declinación nombres en -ius: voc. sg. en -i" },
+            { id: 39, prompt: "39. Acusativo singular de res, rei:", ans: "rem", cat: "sust", level: 3, hint: "5ª declinación ac. sg. (-em)" },
+            { id: 40, prompt: "40. Genitivo plural de amicus, -i:", ans: "amicorum", cat: "sust", level: 1, hint: "2ª declinación gen. pl. (-orum)" },
+            { id: 41, prompt: "41. Ablativo singular de puella, -ae:", ans: "puella", cat: "sust", level: 1, hint: "1ª declinación ablativo singular (-a)" },
+            { id: 42, prompt: "42. Nominativo plural de consul, consulis:", ans: "consules", cat: "sust", level: 2, hint: "3ª declinación nom. pl. (-es)" },
+            { id: 43, prompt: "43. Acusativo plural de res, rei:", ans: "res", cat: "sust", level: 3, hint: "5ª declinación ac. pl. (-es)" },
+            { id: 44, prompt: "44. Dativo singular de manus, -us:", ans: "manui", cat: "sust", level: 3, hint: "4ª declinación dat. sg. (-ui)" },
+            { id: 45, prompt: "45. Genitivo plural de urbs, urbis:", ans: "urbium", cat: "sust", level: 2, hint: "3ª declinación tema en -i gen. pl. (-ium)" },
+            { id: 46, prompt: "46. Genitivo plural de civitas, civitatis:", ans: "civitatum", cat: "sust", level: 2, hint: "3ª declinación consonante gen. pl. (-um)" },
+            { id: 47, prompt: "47. Dativo singular de bellum, -i:", ans: "bello", cat: "sust", level: 1, hint: "2ª declinación neutra dat. sg. (-o)" },
+            { id: 48, prompt: "48. Nominativo plural de animal, animalis:", ans: "animalia", cat: "sust", level: 2, hint: "3ª declinación neutro en -i nom. pl. (-ia)" },
+            { id: 49, prompt: "49. Acusativo singular de pater, patris:", ans: "patrem", cat: "sust", level: 2, hint: "3ª declinación ac. sg. (-em)" },
+            { id: 50, prompt: "50. Genitivo singular de fructus, -us:", ans: "fructus", cat: "sust", level: 3, hint: "4ª declinación gen. sg. (-us)" },
+
+            // ADJETIVOS (51-90)
+            { id: 51, prompt: "51. Acusativo singular masculino de bonus, -a, -um:", ans: "bonum", cat: "adj", level: 1, hint: "Adjetivo 1ª clase ac. sg. masc. (-um)" },
+            { id: 52, prompt: "52. Nominativo plural femenino de bonus, -a, -um:", ans: "bonae", cat: "adj", level: 1, hint: "Adjetivo 1ª clase nom. pl. fem. (-ae)" },
+            { id: 53, prompt: "53. Genitivo plural neutro de bonus, -a, -um:", ans: "bonorum", cat: "adj", level: 1, hint: "Adjetivo 1ª clase gen. pl. neutro (-orum)" },
+            { id: 54, prompt: "54. Ablativo plural (todos géneros) de bonus, -a, -um:", ans: "bonis", cat: "adj", level: 1, hint: "Adjetivo 1ª clase abl. pl. (-is)" },
+            { id: 55, prompt: "55. Genitivo singular femenino de pulcher, -chra, -chrum:", ans: "pulchrae", cat: "adj", level: 1, hint: "1ª clase femenino gen. sg. (-ae)" },
+            { id: 56, prompt: "56. Nominativo plural neutro de pulcher, -chra, -chrum:", ans: "pulchra", cat: "adj", level: 1, hint: "1ª clase neutro nom. pl. (-a)" },
+            { id: 57, prompt: "57. Acusativo plural masculino de pulcher, -chra, -chrum:", ans: "pulchros", cat: "adj", level: 1, hint: "1ª clase masculino ac. pl. (-os)" },
+            { id: 58, prompt: "58. Nominativo singular masculino de acer, acris, acre:", ans: "acer", cat: "adj", level: 2, hint: "Adjetivo 2ª clase 3 terminaciones nom. sg. masc." },
+            { id: 59, prompt: "59. Nominativo singular femenino de acer, acris, acre:", ans: "acris", cat: "adj", level: 2, hint: "Adjetivo 2ª clase nom. sg. fem." },
+            { id: 60, prompt: "60. Nominativo singular neutro de acer, acris, acre:", ans: "acre", cat: "adj", level: 2, hint: "Adjetivo 2ª clase nom. sg. neutro" },
+            { id: 61, prompt: "61. Genitivo singular (todos géneros) de acer, acris, acre:", ans: "acris", cat: "adj", level: 2, hint: "2ª clase genitivo sg. (-is)" },
+            { id: 62, prompt: "62. Ablativo singular (todos géneros) de acer, acris, acre:", ans: "acri", cat: "adj", level: 2, hint: "2ª clase ablativo sg. (-i)" },
+            { id: 63, prompt: "63. Nominativo plural masc/fem de fortis, forte:", ans: "fortes", cat: "adj", level: 2, hint: "Adjetivo 2ª clase 2 term. nom. pl. M/F (-es)" },
+            { id: 64, prompt: "64. Nominativo plural neutro de fortis, forte:", ans: "fortia", cat: "adj", level: 2, hint: "Adjetivo 2ª clase nom. pl. neutro (-ia)" },
+            { id: 65, prompt: "65. Genitivo plural de fortis, forte:", ans: "fortium", cat: "adj", level: 2, hint: "Adjetivo 2ª clase gen. pl. (-ium)" },
+            { id: 66, prompt: "66. Dativo/Ablativo plural de fortis, forte:", ans: "fortibus", cat: "adj", level: 2, hint: "Adjetivo 2ª clase dat/abl. pl. (-ibus)" },
+            { id: 67, prompt: "67. Genitivo singular de ingens, ingentis:", ans: "ingentis", cat: "adj", level: 2, hint: "Adjetivo 2ª clase 1 term. gen. sg. (-is)" },
+            { id: 68, prompt: "68. Acusativo singular neutro de ingens, ingentis:", ans: "ingens", cat: "adj", level: 2, hint: "Regla neutros: ac. sg. neutro igual a nom." },
+            { id: 69, prompt: "69. Ablativo singular de ingens, ingentis:", ans: "ingenti", cat: "adj", level: 2, hint: "2ª clase abl. sg. en -i" },
+            { id: 70, prompt: "70. Nominativo plural neutro de ingens, ingentis:", ans: "ingentia", cat: "adj", level: 2, hint: "2ª clase nom. pl. neutro (-ia)" },
+            { id: 71, prompt: "71. Genitivo plural de ingens, ingentis:", ans: "ingentium", cat: "adj", level: 2, hint: "2ª clase gen. pl. (-ium)" },
+            { id: 72, prompt: "72. Dativo singular femenino de bonus, -a, -um:", ans: "bonae", cat: "adj", level: 1, hint: "1ª clase dat. sg. fem. (-ae)" },
+            { id: 73, prompt: "73. Acusativo plural femenino de bonus, -a, -um:", ans: "bonas", cat: "adj", level: 1, hint: "1ª clase ac. pl. fem. (-as)" },
+            { id: 74, prompt: "74. Dativo singular masculino de pulcher, -chra, -chrum:", ans: "pulchro", cat: "adj", level: 1, hint: "1ª clase dat. sg. masc. (-o)" },
+            { id: 75, prompt: "75. Ablativo singular de fortis, forte:", ans: "forti", cat: "adj", level: 2, hint: "2ª clase abl. sg. en -i" },
+            { id: 76, prompt: "76. Acusativo plural neutro de fortis, forte:", ans: "fortia", cat: "adj", level: 2, hint: "2ª clase ac. pl. neutro (-ia)" },
+            { id: 77, prompt: "77. Acusativo singular masculino/femenino de fortis, forte:", ans: "fortem", cat: "adj", level: 2, hint: "2ª clase ac. sg. M/F (-em)" },
+            { id: 78, prompt: "78. Genitivo singular de prudens, prudentis:", ans: "prudentis", cat: "adj", level: 2, hint: "2ª clase gen. sg. (-is)" },
+            { id: 79, prompt: "79. Dativo singular de prudens, prudentis:", ans: "prudenti", cat: "adj", level: 2, hint: "2ª clase dat. sg. (-i)" },
+            { id: 80, prompt: "80. Nominativo plural neutro de prudens, prudentis:", ans: "prudentia", cat: "adj", level: 2, hint: "2ª clase nom. pl. neutro (-ia)" },
+            { id: 81, prompt: "81. Acusativo singular masculino de pulcher, -chra, -chrum:", ans: "pulchrum", cat: "adj", level: 1, hint: "1ª clase ac. sg. masc. (-um)" },
+            { id: 82, prompt: "82. Genitivo plural femenino de bonus, -a, -um:", ans: "bonarum", cat: "adj", level: 1, hint: "1ª clase gen. pl. fem. (-arum)" },
+            { id: 83, prompt: "83. Dativo plural de acer, acris, acre:", ans: "acribus", cat: "adj", level: 2, hint: "2ª clase dat. pl. (-ibus)" },
+            { id: 84, prompt: "84. Acusativo plural masculino de acer, acris, acre:", ans: "acres", cat: "adj", level: 2, hint: "2ª clase ac. pl. M/F (-es)" },
+            { id: 85, prompt: "85. Genitivo plural de acer, acris, acre:", ans: "acrium", cat: "adj", level: 2, hint: "2ª clase gen. pl. (-ium)" },
+            { id: 86, prompt: "86. Vocativo singular masculino de bonus, -a, -um:", ans: "bone", cat: "adj", level: 1, hint: "Vocativo masculino sg. en -e" },
+            { id: 87, prompt: "87. Ablativo plural de pulcher, -chra, -chrum:", ans: "pulchris", cat: "adj", level: 1, hint: "1ª clase abl. pl. (-is)" },
+            { id: 88, prompt: "88. Dativo singular neutro de fortis, forte:", ans: "forti", cat: "adj", level: 2, hint: "2ª clase dat. sg. (-i)" },
+            { id: 89, prompt: "89. Acusativo plural masculino/femenino de ingens, ingentis:", ans: "ingentes", cat: "adj", level: 2, hint: "2ª clase ac. pl. M/F (-es)" },
+            { id: 90, prompt: "90. Dativo plural de ingens, ingentis:", ans: "ingentibus", cat: "adj", level: 2, hint: "2ª clase dat. pl. (-ibus)" },
+
+            // PRONOMBRES (91-130)
+            { id: 91, prompt: "91. Acusativo singular masculino de hic, haec, hoc:", ans: "hunc", cat: "pron", level: 2, hint: "Demostrativo hic ac. sg. m." },
+            { id: 92, prompt: "92. Genitivo singular (todos géneros) de hic, haec, hoc:", ans: "huius", cat: "pron", level: 2, hint: "Demostrativo gen. sg. en -ius" },
+            { id: 93, prompt: "93. Dativo singular (todos géneros) de hic, haec, hoc:", ans: "huic", cat: "pron", level: 2, hint: "Demostrativo dat. sg. en -ic" },
+            { id: 94, prompt: "94. Ablativo singular masculino/neutro de hic, haec, hoc:", ans: "hoc", cat: "pron", level: 2, hint: "Demostrativo abl. sg. m/n." },
+            { id: 95, prompt: "95. Nominativo plural femenino de hic, haec, hoc:", ans: "hae", cat: "pron", level: 2, hint: "Demostrativo nom. pl. f." },
+            { id: 96, prompt: "96. Nominativo/Acusativo plural neutro de hic, haec, hoc:", ans: "haec", cat: "pron", level: 2, hint: "Demostrativo nom/ac pl. neutro" },
+            { id: 97, prompt: "97. Genitivo plural masculino/neutro de hic, haec, hoc:", ans: "horum", cat: "pron", level: 2, hint: "Demostrativo gen. pl. m/n." },
+            { id: 98, prompt: "98. Genitivo plural femenino de hic, haec, hoc:", ans: "harum", cat: "pron", level: 2, hint: "Demostrativo gen. pl. f." },
+            { id: 99, prompt: "99. Dativo/Ablativo plural (todos géneros) de hic, haec, hoc:", ans: "his", cat: "pron", level: 2, hint: "Demostrativo dat/abl. pl." },
+            { id: 100, prompt: "100. Genitivo singular de ille, illa, illud:", ans: "illius", cat: "pron", level: 2, hint: "Demostrativo ille gen. sg." },
+            { id: 101, prompt: "101. Dativo singular de ille, illa, illud:", ans: "illi", cat: "pron", level: 2, hint: "Demostrativo ille dat. sg." },
+            { id: 102, prompt: "102. Acusativo singular femenino de ille, illa, illud:", ans: "illam", cat: "pron", level: 2, hint: "Demostrativo ac. sg. f." },
+            { id: 103, prompt: "103. Nominativo/Acusativo plural neutro de ille, illa, illud:", ans: "illa", cat: "pron", level: 2, hint: "Demostrativo nom/ac pl. neutro" },
+            { id: 104, prompt: "104. Acusativo plural masculino de ille, illa, illud:", ans: "illos", cat: "pron", level: 2, hint: "Demostrativo ac. pl. m." },
+            { id: 105, prompt: "105. Acusativo plural femenino de ille, illa, illud:", ans: "illas", cat: "pron", level: 2, hint: "Demostrativo ac. pl. f." },
+            { id: 106, prompt: "106. Genitivo plural femenino de ille, illa, illud:", ans: "illarum", cat: "pron", level: 2, hint: "Demostrativo gen. pl. f." },
+            { id: 107, prompt: "107. Genitivo singular de iste, ista, istud:", ans: "istius", cat: "pron", level: 2, hint: "Demostrativo iste gen. sg." },
+            { id: 108, prompt: "108. Dativo singular de iste, ista, istud:", ans: "isti", cat: "pron", level: 2, hint: "Demostrativo iste dat. sg." },
+            { id: 109, prompt: "109. Acusativo singular masculino de iste, ista, istud:", ans: "istum", cat: "pron", level: 2, hint: "Demostrativo ac. sg. m." },
+            { id: 110, prompt: "110. Nominativo singular femenino de is, ea, id:", ans: "ea", cat: "pron", level: 2, hint: "Fórico/Anafórico nom. sg. f." },
+            { id: 111, prompt: "111. Nominativo singular neutro de is, ea, id:", ans: "id", cat: "pron", level: 2, hint: "Fórico nom. sg. neutro" },
+            { id: 112, prompt: "112. Acusativo singular masculino de is, ea, id:", ans: "eum", cat: "pron", level: 2, hint: "Fórico ac. sg. m." },
+            { id: 113, prompt: "113. Acusativo singular femenino de is, ea, id:", ans: "eam", cat: "pron", level: 2, hint: "Fórico ac. sg. f." },
+            { id: 114, prompt: "114. Genitivo singular de is, ea, id:", ans: "eius", cat: "pron", level: 2, hint: "Fórico gen. sg. (eius)" },
+            { id: 115, prompt: "115. Dativo singular de is, ea, id:", ans: "ei", cat: "pron", level: 2, hint: "Fórico dat. sg. (ei)" },
+            { id: 116, prompt: "116. Ablativo singular femenino de is, ea, id:", ans: "ea", cat: "pron", level: 2, hint: "Fórico abl. sg. f." },
+            { id: 117, prompt: "117. Nominativo plural masculino de is, ea, id:", ans: "ii", altAns: ["ei"], cat: "pron", level: 2, hint: "Fórico nom. pl. m." },
+            { id: 118, prompt: "118. Genitivo plural masculino/neutro de is, ea, id:", ans: "eorum", cat: "pron", level: 2, hint: "Fórico gen. pl. m/n." },
+            { id: 119, prompt: "119. Genitivo plural femenino de is, ea, id:", ans: "earum", cat: "pron", level: 2, hint: "Fórico gen. pl. f." },
+            { id: 120, prompt: "120. Dativo/Ablativo plural de is, ea, id:", ans: "iis", altAns: ["eis"], cat: "pron", level: 2, hint: "Fórico dat/abl. pl." },
+            { id: 121, prompt: "121. Nominativo singular neutro de idem, eadem, idem:", ans: "idem", cat: "pron", level: 2, hint: "Identidad nom. sg. neutro" },
+            { id: 122, prompt: "122. Acusativo singular masculino de idem, eadem, idem:", ans: "eundem", cat: "pron", level: 2, hint: "Identidad ac. sg. m." },
+            { id: 123, prompt: "123. Acusativo singular femenino de idem, eadem, idem:", ans: "eandem", cat: "pron", level: 2, hint: "Identidad ac. sg. f." },
+            { id: 124, prompt: "124. Genitivo plural masculino/neutro de idem, eadem, idem:", ans: "eorundem", cat: "pron", level: 2, hint: "Identidad gen. pl. m/n." },
+            { id: 125, prompt: "125. Genitivo singular de ipse, ipsa, ipsum:", ans: "ipsius", cat: "pron", level: 2, hint: "Enfático ipse gen. sg." },
+            { id: 126, prompt: "126. Dativo singular de ipse, ipsa, ipsum:", ans: "ipsi", cat: "pron", level: 2, hint: "Enfático ipse dat. sg." },
+            { id: 127, prompt: "127. Acusativo singular masculino de qui, quae, quod:", ans: "quem", cat: "pron", level: 3, hint: "Relativo ac. sg. m." },
+            { id: 128, prompt: "128. Genitivo singular (todos géneros) de qui, quae, quod:", ans: "cuius", cat: "pron", level: 3, hint: "Relativo gen. sg." },
+            { id: 129, prompt: "129. Dativo singular (todos géneros) de qui, quae, quod:", ans: "cui", cat: "pron", level: 3, hint: "Relativo dat. sg." },
+            { id: 130, prompt: "130. Dativo/Ablativo plural (todos géneros) de qui, quae, quod:", ans: "quibus", cat: "pron", level: 3, hint: "Relativo dat/abl. pl." },
+
+            // VERBOS (131-200)
+            { id: 131, prompt: "131. 3ª sg presente indicativo activo de amo, -are:", ans: "amat", cat: "verb", level: 1, hint: "1ª conj. pres. ind. act. 3ª sg." },
+            { id: 132, prompt: "132. 1ª pl pretérito imperfecto indicativo activo de moneo, -ere:", ans: "monebamus", cat: "verb", level: 1, hint: "2ª conj. impf. ind. act. 1ª pl." },
+            { id: 133, prompt: "133. 3ª pl presente indicativo activo de sum, esse:", ans: "sunt", cat: "verb", level: 1, hint: "Verbo sum pres. ind. 3ª pl." },
+            { id: 134, prompt: "134. 3ª sg pretérito imperfecto indicativo activo de sum, esse:", ans: "erat", cat: "verb", level: 1, hint: "Verbo sum impf. ind. 3ª sg." },
+            { id: 135, prompt: "135. 3ª pl pretérito perfecto indicativo activo de rego, -ere:", ans: "rexerunt", cat: "verb", level: 2, hint: "3ª conj. perf. ind. act. 3ª pl." },
+            { id: 136, prompt: "136. 2ª sg futuro imperfecto indicativo activo de audio, -ire:", ans: "audies", cat: "verb", level: 2, hint: "4ª conj. fut. impf. ind. act. 2ª sg." },
+            { id: 137, prompt: "137. 1ª pl pretérito perfecto indicativo activo de sum, esse:", ans: "fuimus", cat: "verb", level: 2, hint: "Verbo sum perf. ind. 1ª pl." },
+            { id: 138, prompt: "138. 3ª sg presente indicativo pasivo de amo, -are:", ans: "amatur", cat: "verb", level: 3, hint: "1ª conj. pres. ind. pasivo 3ª sg." },
+            { id: 139, prompt: "139. Infinitivo presente activo de capio, -ere:", ans: "capere", cat: "verb", level: 3, hint: "Conjugación mixta infinitivo pres. act." },
+            { id: 140, prompt: "140. 2ª pl pretérito imperfecto indicativo activo de capio, -ere:", ans: "capiebatis", cat: "verb", level: 3, hint: "Mixta impf. ind. act. 2ª pl." },
+            { id: 141, prompt: "141. 1ª sg presente subjuntivo activo de amo, -are:", ans: "amem", cat: "verb", level: 3, hint: "1ª conj. presente subjuntivo 1ª sg. (-em)" },
+            { id: 142, prompt: "142. 3ª sg pretérito imperfecto subjuntivo activo de amo, -are:", ans: "amaret", cat: "verb", level: 3, hint: "1ª conj. imperfecto subjuntivo (infinitivo + desinencia)" },
+            { id: 143, prompt: "143. 3ª pl pretérito perfecto subjuntivo activo de amo, -are:", ans: "amaverint", cat: "verb", level: 3, hint: "Tema perfecto + -erint" },
+            { id: 144, prompt: "144. 3ª sg pretérito pluscuamperfecto subjuntivo activo de amo, -are:", ans: "amavisset", cat: "verb", level: 3, hint: "Tema perfecto + -isset" },
+            { id: 145, prompt: "145. 1ª sg presente subjuntivo activo de moneo, -ere:", ans: "moneam", cat: "verb", level: 3, hint: "2ª conj. presente subjuntivo (-eam)" },
+            { id: 146, prompt: "146. 3ª sg pretérito imperfecto subjuntivo activo de moneo, -ere:", ans: "moneret", cat: "verb", level: 3, hint: "2ª conj. imperfecto subjuntivo" },
+            { id: 147, prompt: "147. 3ª sg presente subjuntivo activo de rego, -ere:", ans: "regat", cat: "verb", level: 3, hint: "3ª conj. presente subjuntivo (-at)" },
+            { id: 148, prompt: "148. 3ª pl presente subjuntivo activo de audio, -ire:", ans: "audiant", cat: "verb", level: 3, hint: "4ª conj. presente subjuntivo (-iant)" },
+            { id: 149, prompt: "149. 1ª sg presente subjuntivo activo de sum, esse:", ans: "sim", cat: "verb", level: 3, hint: "Verbo sum presente subjuntivo (sim, sis, sit...)" },
+            { id: 150, prompt: "150. 3ª sg pretérito imperfecto subjuntivo activo de sum, esse:", ans: "esset", cat: "verb", level: 3, hint: "Verbo sum imperfecto subjuntivo (essem, esses, esset...)" },
+            { id: 151, prompt: "151. 3ª pl pretérito perfecto subjuntivo activo de sum, esse:", ans: "fuerint", cat: "verb", level: 3, hint: "Verbo sum perfecto subjuntivo" },
+            { id: 152, prompt: "152. 3ª sg pretérito pluscuamperfecto subjuntivo activo de sum, esse:", ans: "fuisset", cat: "verb", level: 3, hint: "Verbo sum pluscuamperfecto subjuntivo" },
+            { id: 153, prompt: "153. 3ª sg presente indicativo pasivo de moneo, -ere:", ans: "monetur", cat: "verb", level: 3, hint: "2ª conj. pres. ind. pasivo 3ª sg." },
+            { id: 154, prompt: "154. 3ª pl pretérito imperfecto indicativo pasivo de amo, -are:", ans: "amabantur", cat: "verb", level: 3, hint: "1ª conj. impf. ind. pasivo 3ª pl." },
+            { id: 155, prompt: "155. 2ª sg futuro imperfecto indicativo pasivo de amo, -are:", ans: "amaberis", altAns: ["amabere"], cat: "verb", level: 3, hint: "1ª conj. fut. pasivo 2ª sg." },
+            { id: 156, prompt: "156. 3ª sg futuro imperfecto indicativo activo de moneo, -ere:", ans: "monebit", cat: "verb", level: 2, hint: "2ª conj. fut. impf. 3ª sg." },
+            { id: 157, prompt: "157. 3ª sg futuro imperfecto indicativo activo de rego, -ere:", ans: "reget", cat: "verb", level: 2, hint: "3ª conj. fut. impf. en -et" },
+            { id: 158, prompt: "158. 1ª sg futuro imperfecto indicativo activo de audio, -ire:", ans: "audiam", cat: "verb", level: 2, hint: "4ª conj. fut. impf. 1ª sg." },
+            { id: 159, prompt: "159. 3ª sg futuro perfecto indicativo activo de amo, -are:", ans: "amaverit", cat: "verb", level: 2, hint: "Tema perfecto + -erit" },
+            { id: 160, prompt: "160. 3ª pl futuro perfecto indicativo activo de rego, -ere:", ans: "rexerint", cat: "verb", level: 2, hint: "Tema perfecto + -erint" },
+            { id: 161, prompt: "161. 3ª sg pretérito pluscuamperfecto indicativo activo de amo, -are:", ans: "amaverat", cat: "verb", level: 2, hint: "Tema perfecto + -erat" },
+            { id: 162, prompt: "162. 1ª pl pretérito pluscuamperfecto indicativo activo de moneo, -ere:", ans: "monueramus", cat: "verb", level: 2, hint: "Tema perfecto + -eramus" },
+            { id: 163, prompt: "163. 3ª pl pretérito pluscuamperfecto indicativo activo de rego, -ere:", ans: "rexerant", cat: "verb", level: 2, hint: "Tema perfecto + -erant" },
+            { id: 164, prompt: "164. 1ª sg pretérito perfecto indicativo activo de audio, -ire:", ans: "audivi", cat: "verb", level: 2, hint: "4ª conj. perf. ind. 1ª sg." },
+            { id: 165, prompt: "165. 2ª sg presente indicativo activo de capio, -ere:", ans: "capis", cat: "verb", level: 3, hint: "Mixta pres. ind. 2ª sg." },
+            { id: 166, prompt: "166. 3ª pl presente indicativo activo de capio, -ere:", ans: "capiunt", cat: "verb", level: 3, hint: "Mixta pres. ind. 3ª pl." },
+            { id: 167, prompt: "167. 3ª sg presente subjuntivo activo de capio, -ere:", ans: "capiat", cat: "verb", level: 3, hint: "Mixta pres. subj. 3ª sg." },
+            { id: 168, prompt: "168. 3ª sg pretérito imperfecto subjuntivo activo de capio, -ere:", ans: "caperet", cat: "verb", level: 3, hint: "Mixta impf. subj. 3ª sg." },
+            { id: 169, prompt: "169. 1ª sg futuro imperfecto indicativo activo de sum, esse:", ans: "ero", cat: "verb", level: 2, hint: "Verbo sum futuro (ero, eris, erit...)" },
+            { id: 170, prompt: "170. 2ª sg futuro imperfecto indicativo activo de sum, esse:", ans: "eris", cat: "verb", level: 2, hint: "Verbo sum futuro 2ª sg." },
+            { id: 171, prompt: "171. 3ª sg futuro imperfecto indicativo activo de sum, esse:", ans: "erit", cat: "verb", level: 2, hint: "Verbo sum futuro 3ª sg." },
+            { id: 172, prompt: "172. 1ª pl futuro imperfecto indicativo activo de sum, esse:", ans: "erimus", cat: "verb", level: 2, hint: "Verbo sum futuro 1ª pl." },
+            { id: 173, prompt: "173. 3ª pl futuro imperfecto indicativo activo de sum, esse:", ans: "erunt", cat: "verb", level: 2, hint: "Verbo sum futuro 3ª pl." },
+            { id: 174, prompt: "174. 1ª sg pretérito pluscuamperfecto indicativo activo de sum, esse:", ans: "fueram", cat: "verb", level: 2, hint: "Verbo sum pluscuamperfecto 1ª sg." },
+            { id: 175, prompt: "175. 3ª sg pretérito pluscuamperfecto indicativo activo de sum, esse:", ans: "fuerat", cat: "verb", level: 2, hint: "Verbo sum pluscuamperfecto 3ª sg." },
+            { id: 176, prompt: "176. 3ª pl pretérito pluscuamperfecto indicativo activo de sum, esse:", ans: "fuerant", cat: "verb", level: 2, hint: "Verbo sum pluscuamperfecto 3ª pl." },
+            { id: 177, prompt: "177. 1ª sg futuro perfecto indicativo activo de sum, esse:", ans: "fuero", cat: "verb", level: 2, hint: "Verbo sum futuro perfecto 1ª sg." },
+            { id: 178, prompt: "178. 3ª sg futuro perfecto indicativo activo de sum, esse:", ans: "fuerit", cat: "verb", level: 2, hint: "Verbo sum futuro perfecto 3ª sg." },
+            { id: 179, prompt: "179. 3ª sg presente subjuntivo pasivo de amo, -are:", ans: "ametur", cat: "verb", level: 3, hint: "1ª conj. pres. subj. pasivo 3ª sg." },
+            { id: 180, prompt: "180. 3ª pl presente subjuntivo pasivo de amo, -are:", ans: "amentur", cat: "verb", level: 3, hint: "1ª conj. pres. subj. pasivo 3ª pl." },
+            { id: 181, prompt: "181. 3ª sg pretérito imperfecto subjuntivo pasivo de amo, -are:", ans: "amaretur", cat: "verb", level: 3, hint: "1ª conj. impf. subj. pasivo 3ª sg." },
+            { id: 182, prompt: "182. 3ª sg presente subjuntivo pasivo de moneo, -ere:", ans: "moneatur", cat: "verb", level: 3, hint: "2ª conj. pres. subj. pasivo 3ª sg." },
+            { id: 183, prompt: "183. 3ª sg pretérito imperfecto subjuntivo pasivo de moneo, -ere:", ans: "moneretur", cat: "verb", level: 3, hint: "2ª conj. impf. subj. pasivo 3ª sg." },
+            { id: 184, prompt: "184. 3ª sg presente subjuntivo pasivo de rego, -ere:", ans: "regatur", cat: "verb", level: 3, hint: "3ª conj. pres. subj. pasivo 3ª sg." },
+            { id: 185, prompt: "185. 3ª sg presente subjuntivo pasivo de audio, -ire:", ans: "audiatur", cat: "verb", level: 3, hint: "4ª conj. pres. subj. pasivo 3ª sg." },
+            { id: 186, prompt: "186. 3ª pl pretérito imperfecto indicativo pasivo de moneo, -ere:", ans: "monebantur", cat: "verb", level: 3, hint: "2ª conj. impf. ind. pasivo 3ª pl." },
+            { id: 187, prompt: "187. 3ª sg pretérito imperfecto indicativo pasivo de rego, -ere:", ans: "regebatur", cat: "verb", level: 3, hint: "3ª conj. impf. ind. pasivo 3ª sg." },
+            { id: 188, prompt: "188. 3ª sg pretérito imperfecto indicativo pasivo de audio, -ire:", ans: "audiebatur", cat: "verb", level: 3, hint: "4ª conj. impf. ind. pasivo 3ª sg." },
+            { id: 189, prompt: "189. 1ª pl presente indicativo pasivo de amo, -are:", ans: "amamur", cat: "verb", level: 3, hint: "1ª conj. pres. ind. pasivo 1ª pl." },
+            { id: 190, prompt: "190. 2ª pl presente indicativo pasivo de amo, -are:", ans: "amamini", cat: "verb", level: 3, hint: "1ª conj. pres. ind. pasivo 2ª pl." },
+            { id: 191, prompt: "191. 3ª pl presente indicativo pasivo de moneo, -ere:", ans: "monentur", cat: "verb", level: 3, hint: "2ª conj. pres. ind. pasivo 3ª pl." },
+            { id: 192, prompt: "192. 3ª pl presente indicativo pasivo de rego, -ere:", ans: "reguntur", cat: "verb", level: 3, hint: "3ª conj. pres. ind. pasivo 3ª pl." },
+            { id: 193, prompt: "193. 3ª pl presente indicativo pasivo de audio, -ire:", ans: "audiuntur", cat: "verb", level: 3, hint: "4ª conj. pres. ind. pasivo 3ª pl." },
+            { id: 194, prompt: "194. 2ª sg presente indicativo pasivo de amo, -are:", ans: "amaris", altAns: ["amare"], cat: "verb", level: 3, hint: "1ª conj. pres. ind. pasivo 2ª sg." },
+            { id: 195, prompt: "195. 2ª sg presente indicativo pasivo de moneo, -ere:", ans: "moneris", altAns: ["monere"], cat: "verb", level: 3, hint: "2ª conj. pres. ind. pasivo 2ª sg." },
+            { id: 196, prompt: "196. 2ª sg presente indicativo pasivo de rego, -ere:", ans: "regeris", altAns: ["regere"], cat: "verb", level: 3, hint: "3ª conj. pres. ind. pasivo 2ª sg." },
+            { id: 197, prompt: "197. 2ª sg presente indicativo pasivo de audio, -ire:", ans: "audiris", altAns: ["audire"], cat: "verb", level: 3, hint: "4ª conj. pres. ind. pasivo 2ª sg." },
+            { id: 198, prompt: "198. Infinitivo presente pasivo de amo, -are:", ans: "amari", cat: "verb", level: 3, hint: "1ª conj. infinitivo pasivo (-ari)" },
+            { id: 199, prompt: "199. Infinitivo presente pasivo de moneo, -ere:", ans: "moneri", cat: "verb", level: 3, hint: "2ª conj. infinitivo pasivo (-eri)" },
+            { id: 200, prompt: "200. Infinitivo presente pasivo de rego, -ere:", ans: "regi", cat: "verb", level: 3, hint: "3ª conj. infinitivo pasivo (-i)" }
+        ];
+
+        /* ==========================================================================
+           2. STATE MANAGEMENT & GLOBALS
+           ========================================================================== */
+
+        let state = {
+            soundEnabled: true,
+            activeTab: 'practice',
+            practice: {
+                topic: 'all',
+                level: 'all',
+                format: 'write', // 'write', 'choice', 'inverse'
+                score: 0,
+                errors: 0,
+                streak: 0,
+                currentQ: null,
+                answered: false
+            },
+            exam: {
+                questions: [],
+                userAnswers: new Array(200).fill(""),
+                currentIndex: 0,
+                currentPage: 0, // Page 0: 1-20, Page 1: 21-40 ...
+                timeLeft: 3600, // 60 mins
+                timerInterval: null,
+                submitted: false
+            }
+        };
+
+        // Synthesizer Audio Context
+        let audioCtx = null;
+        function playSound(type) {
+            if (!state.soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(130.81, audioCtx.currentTime + 0.25);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+
+        function toggleSound() {
+            state.soundEnabled = !state.soundEnabled;
+            document.getElementById('soundIcon').className = state.soundEnabled ? 'fa-solid fa-volume-high text-lg' : 'fa-solid fa-volume-xmark text-lg text-gray-400';
+        }
+
+        /* Normalizer utility */
+        function normalizeString(str) {
+            if (!str) return '';
+            return str.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z]/g, "");
+        }
+
+        function isAnswerCorrect(userAns, targetObj) {
+            const normUser = normalizeString(userAns);
+            const normTarget = normalizeString(targetObj.ans);
+            if (normUser === normTarget) return true;
+            if (targetObj.altAns && Array.isArray(targetObj.altAns)) {
+                return targetObj.altAns.some(alt => normalizeString(alt) === normUser);
+            }
+            return false;
+        }
+
+        /* ==========================================================================
+           3. NAVIGATION
+           ========================================================================== */
+
+        function switchTab(tabName) {
+            state.activeTab = tabName;
+            ['practice', 'exam', 'grammar'].forEach(t => {
+                document.getElementById(`section-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).className = 'px-4 py-2 rounded-lg font-bold border border-transparent transition flex items-center gap-2 whitespace-nowrap text-parchment-200 hover:bg-crimson-900';
+            });
+
+            document.getElementById(`section-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).className = 'px-4 py-2 rounded-lg font-bold border border-transparent transition flex items-center gap-2 whitespace-nowrap tab-active';
+
+            if (tabName === 'exam' && state.exam.questions.length === 0) {
+                initExam();
+            } else if (tabName === 'grammar') {
+                renderVerbTable();
+            }
+        }
+
+        function switchGrammarTab(viewId) {
+            ['sust', 'adj', 'pron', 'verb'].forEach(v => {
+                document.getElementById(`gview-${v}`).classList.add('hidden');
+                document.getElementById(`gtab-${v}`).className = 'px-4 py-2 font-cinzel font-bold text-sm text-gray-500 border-b-2 border-transparent hover:text-crimson-900 whitespace-nowrap';
+            });
+
+            document.getElementById(`gview-${viewId}`).classList.remove('hidden');
+            document.getElementById(`gtab-${viewId}`).className = 'px-4 py-2 font-cinzel font-bold text-sm border-b-2 border-crimson-900 text-crimson-900 whitespace-nowrap';
+
+            if (viewId === 'verb') renderVerbTable();
+        }
+
+        /* ==========================================================================
+           4. MODO PRÁCTICA
+           ========================================================================== */
+
+        function updatePracticeFilters() {
+            state.practice.topic = document.getElementById('practice-topic').value;
+            state.practice.level = document.getElementById('practice-level').value;
+            nextPracticeQuestion();
+        }
+
+        function setFormat(fmt) {
+            state.practice.format = fmt;
+            ['write', 'choice', 'inverse'].forEach(f => {
+                const btn = document.getElementById(`fmt-${f}`);
+                if (f === fmt) {
+                    btn.className = 'flex-1 py-1.5 text-xs font-bold rounded-md bg-crimson-900 text-white transition';
+                } else {
+                    btn.className = 'flex-1 py-1.5 text-xs font-bold rounded-md text-parchment-800 transition';
+                }
+            });
+
+            if (fmt === 'write') {
+                document.getElementById('mode-text-input').classList.remove('hidden');
+                document.getElementById('mode-choice-input').classList.add('hidden');
+            } else {
+                document.getElementById('mode-text-input').classList.add('hidden');
+                document.getElementById('mode-choice-input').classList.remove('hidden');
+            }
+            renderPracticeQuestion();
+        }
+
+        function getPracticePool() {
+            let pool = QUESTION_BANK_200;
+            if (state.practice.topic !== 'all') {
+                pool = pool.filter(q => q.cat === state.practice.topic);
+            }
+            if (state.practice.level !== 'all') {
+                const lvl = parseInt(state.practice.level);
+                pool = pool.filter(q => q.level === lvl);
+            }
+            return pool.length > 0 ? pool : QUESTION_BANK_200;
+        }
+
+        function nextPracticeQuestion() {
+            state.practice.answered = false;
+            document.getElementById('feedback-box').classList.add('hidden');
+            document.getElementById('practice-hint-box').classList.add('hidden');
+            document.getElementById('hint-btn-text').innerText = 'Ver pista gramatical';
+            document.getElementById('practice-input').value = '';
+
+            const pool = getPracticePool();
+            state.practice.currentQ = pool[Math.floor(Math.random() * pool.length)];
+            renderPracticeQuestion();
+        }
+
+        function renderPracticeQuestion() {
+            const q = state.practice.currentQ;
+            if (!q) return;
+
+            const badgeText = { sust: 'Sustantivo', adj: 'Adjetivo', pron: 'Pronombre', verb: 'Verbo' }[q.cat] || 'Gramática';
+            document.getElementById('question-badge').innerText = badgeText;
+            document.getElementById('hint-text').innerText = q.hint;
+
+            if (state.practice.format === 'inverse') {
+                document.getElementById('question-prompt').innerHTML = `Analiza la forma latina: <span class="text-crimson-900 underline font-bold">${q.ans}</span>`;
+            } else {
+                document.getElementById('question-prompt').innerText = q.prompt;
+            }
+
+            if (state.practice.format !== 'write') {
+                const container = document.getElementById('mode-choice-input');
+                container.innerHTML = '';
+
+                let choices = [];
+                if (state.practice.format === 'inverse') {
+                    choices = generateInverseChoices(q);
+                } else {
+                    choices = shuffleArray([q.ans, ...generateDistractors(q)]);
+                }
+
+                choices.forEach(choiceText => {
+                    const btn = document.createElement('button');
+                    btn.className = 'w-full text-left bg-white border-2 border-gold-400 hover:border-crimson-900 rounded-xl p-4 font-bold text-parchment-900 shadow-sm transition hover:bg-amber-50';
+                    btn.innerHTML = `<i class="fa-regular fa-circle mr-2 text-gold-600"></i> ${choiceText}`;
+                    btn.onclick = () => checkPracticeChoice(choiceText, q);
+                    container.appendChild(btn);
+                });
+            } else {
+                setTimeout(() => document.getElementById('practice-input').focus(), 100);
+            }
+        }
+
+        function generateDistractors(q) {
+            const endings = ['a', 'ae', 'am', 'is', 'orum', 'i', 'o', 'os', 'es', 'ibus', 'um', 'ium', 'ebat', 'ant', 'erunt', 'at', 'us', 'u'];
+            let set = new Set();
+            while (set.size < 3) {
+                let suffix = endings[Math.floor(Math.random() * endings.length)];
+                let fake = q.ans.substring(0, Math.max(2, q.ans.length - 2)) + suffix;
+                if (fake !== q.ans) set.add(fake);
+            }
+            return Array.from(set);
+        }
+
+        function generateInverseChoices(q) {
+            const correctAnalysis = q.prompt.replace(/^\d+\.\s*/, '');
+            let set = new Set([correctAnalysis]);
+            const fakeAnalyses = [
+                "Acusativo plural femenino", "Genitivo singular neutro", "Dativo plural masculino",
+                "3ª persona plural pretérito perfecto indicativo activo", "Ablativo singular femenino",
+                "Nominativo plural neutro", "2ª persona singular futuro imperfecto pasivo"
+            ];
+
+            while (set.size < 4) {
+                let fake = fakeAnalyses[Math.floor(Math.random() * fakeAnalyses.length)];
+                set.add(fake);
+            }
+            return shuffleArray(Array.from(set));
+        }
+
+        function togglePracticeHint() {
+            const box = document.getElementById('practice-hint-box');
+            box.classList.toggle('hidden');
+            document.getElementById('hint-btn-text').innerText = box.classList.contains('hidden') ? 'Ver pista gramatical' : 'Ocultar pista';
+        }
+
+        function checkPracticeAnswer() {
+            if (state.practice.answered) return;
+            const inputVal = document.getElementById('practice-input').value;
+            if (!inputVal.trim()) return;
+            evaluatePractice(inputVal);
+        }
+
+        function checkPracticeChoice(chosenText, q) {
+            if (state.practice.answered) return;
+            if (state.practice.format === 'inverse') {
+                const correctAnalysis = q.prompt.replace(/^\d+\.\s*/, '');
+                evaluatePracticeDirect(chosenText === correctAnalysis, chosenText, correctAnalysis);
+            } else {
+                evaluatePractice(chosenText);
+            }
+        }
+
+        function evaluatePractice(userAns) {
+            const q = state.practice.currentQ;
+            const isCorrect = isAnswerCorrect(userAns, q);
+            evaluatePracticeDirect(isCorrect, userAns, q.ans);
+        }
+
+        function evaluatePracticeDirect(isCorrect, userDisplay, targetDisplay) {
+            state.practice.answered = true;
+            const q = state.practice.currentQ;
+
+            const feedbackBox = document.getElementById('feedback-box');
+            feedbackBox.classList.remove('hidden');
+
+            if (isCorrect) {
+                playSound('correct');
+                state.practice.score++;
+                state.practice.streak++;
+                feedbackBox.className = 'mt-6 p-4 rounded-xl border-2 bg-emerald-50 border-emerald-500 text-emerald-950';
+                document.getElementById('feedback-icon').innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
+                document.getElementById('feedback-title').innerText = '¡Optime! Respuesta Correcta';
+                document.getElementById('feedback-detail').innerHTML = `La forma <b>${targetDisplay}</b> es totalmente correcta.`;
+            } else {
+                playSound('wrong');
+                state.practice.errors++;
+                state.practice.streak = 0;
+                feedbackBox.className = 'mt-6 p-4 rounded-xl border-2 bg-rose-50 border-rose-500 text-rose-950';
+                document.getElementById('feedback-icon').innerHTML = '<i class="fa-solid fa-circle-xmark text-rose-600"></i>';
+                document.getElementById('feedback-title').innerText = 'Respuesta Incorrecta';
+                document.getElementById('feedback-detail').innerHTML = `Escribiste: <span class="line-through">${userDisplay}</span>. La solución correcta es: <b class="text-crimson-900">${targetDisplay}</b>.<br><span class="text-xs text-gray-600">${q.hint}</span>`;
+            }
+
+            const total = state.practice.score + state.practice.errors;
+            document.getElementById('practice-score').innerText = state.practice.score;
+            document.getElementById('practice-streak').innerText = `${state.practice.streak} 🔥`;
+            document.getElementById('practice-errors').innerText = state.practice.errors;
+            document.getElementById('practice-accuracy').innerText = `${Math.round((state.practice.score / total) * 100)}%`;
+        }
+
+        /* ==========================================================================
+           5. MODO EXAMEN DE 200 FORMAS
+           ========================================================================== */
+
+        function initExam() {
+            state.exam.questions = [...QUESTION_BANK_200];
+            state.exam.userAnswers = new Array(200).fill("");
+            state.exam.currentIndex = 0;
+            state.exam.currentPage = 0;
+            state.exam.timeLeft = 3600; // 60 mins
+
+            document.getElementById('exam-results-panel').classList.add('hidden');
+            document.getElementById('exam-active-card').classList.remove('hidden');
+
+            renderExamPageSelector();
+            renderExamGrid();
+            renderExamQuestion();
+            startExamTimer();
+        }
+
+        function startExamTimer() {
+            if (state.exam.timerInterval) clearInterval(state.exam.timerInterval);
+            state.exam.timerInterval = setInterval(() => {
+                if (state.exam.timeLeft <= 0) {
+                    clearInterval(state.exam.timerInterval);
+                    finishExam();
+                    return;
+                }
+                state.exam.timeLeft--;
+                const mins = Math.floor(state.exam.timeLeft / 60).toString().padStart(2, '0');
+                const secs = (state.exam.timeLeft % 60).toString().padStart(2, '0');
+                document.getElementById('exam-timer').innerText = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function renderExamPageSelector() {
+            const container = document.getElementById('exam-page-selector');
+            container.innerHTML = '';
+            for (let i = 0; i < 10; i++) {
+                const btn = document.createElement('button');
+                const start = i * 20 + 1;
+                const end = (i + 1) * 20;
+                btn.className = `px-2 py-1 text-xs rounded border font-bold transition ${state.exam.currentPage === i ? 'bg-crimson-900 text-gold-400 border-gold-500' : 'bg-parchment-100 text-gray-700 hover:bg-parchment-200'}`;
+                btn.innerText = `${start}-${end}`;
+                btn.onclick = () => {
+                    state.exam.currentPage = i;
+                    renderExamPageSelector();
+                    renderExamGrid();
+                };
+                container.appendChild(btn);
+            }
+        }
+
+        function renderExamGrid() {
+            const grid = document.getElementById('exam-grid');
+            grid.innerHTML = '';
+            const startIdx = state.exam.currentPage * 20;
+            const endIdx = startIdx + 20;
+
+            for (let idx = startIdx; idx < endIdx; idx++) {
+                const btn = document.createElement('button');
+                const isCurrent = idx === state.exam.currentIndex;
+                const hasAns = state.exam.userAnswers[idx] && state.exam.userAnswers[idx].trim() !== "";
+
+                btn.className = `w-9 h-8 rounded font-bold text-xs ${
+                    isCurrent ? 'bg-crimson-900 text-gold-400 border-2 border-gold-500 shadow' :
+                    hasAns ? 'bg-amber-200 text-amber-900 border border-amber-400' :
+                    'bg-white text-gray-600 border border-gray-300 hover:bg-parchment-200'
+                }`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => jumpToExamQuestion(idx);
+                grid.appendChild(btn);
+            }
+        }
+
+        function saveCurrentExamAnswer() {
+            const input = document.getElementById('exam-answer-input');
+            if (input) {
+                state.exam.userAnswers[state.exam.currentIndex] = input.value;
+            }
+        }
+
+        function renderExamQuestion() {
+            const idx = state.exam.currentIndex;
+            const q = state.exam.questions[idx];
+
+            document.getElementById('exam-q-number').innerText = `Pregunta ${idx + 1} de 200`;
+            document.getElementById('exam-q-type').innerText = { sust: 'Sustantivo', adj: 'Adjetivo', pron: 'Pronombre', verb: 'Verbo' }[q.cat] || 'Gramática';
+            document.getElementById('exam-q-text').innerText = q.prompt;
+
+            const input = document.getElementById('exam-answer-input');
+            input.value = state.exam.userAnswers[idx] || '';
+
+            const answeredCount = state.exam.userAnswers.filter(a => a && a.trim() !== "").length;
+            document.getElementById('exam-progress-counter').innerText = `${answeredCount} / 200`;
+
+            // Auto switch page selector if needed
+            const pageOfQ = Math.floor(idx / 20);
+            if (pageOfQ !== state.exam.currentPage) {
+                state.exam.currentPage = pageOfQ;
+                renderExamPageSelector();
+            }
+
+            renderExamGrid();
+            setTimeout(() => input.focus(), 50);
+        }
+
+        function navExamQuestion(delta) {
+            saveCurrentExamAnswer();
+            let newIdx = state.exam.currentIndex + delta;
+            if (newIdx >= 0 && newIdx < 200) {
+                state.exam.currentIndex = newIdx;
+                renderExamQuestion();
+            }
+        }
+
+        function jumpToExamQuestion(idx) {
+            saveCurrentExamAnswer();
+            state.exam.currentIndex = idx;
+            renderExamQuestion();
+        }
+
+        function confirmFinishExam() {
+            saveCurrentExamAnswer();
+            const answeredCount = state.exam.userAnswers.filter(a => a && a.trim() !== "").length;
+
+            if (answeredCount < 200) {
+                const proceed = confirm(`Has respondido ${answeredCount} de 200 preguntas. ¿Deseas entregar el examen de todos modos?`);
+                if (!proceed) return;
+            }
+            finishExam();
+        }
+
+        function finishExam() {
+            clearInterval(state.exam.timerInterval);
+            let score = 0;
+            let catScores = { sust: { c: 0, t: 0 }, adj: { c: 0, t: 0 }, pron: { c: 0, t: 0 }, verb: { c: 0, t: 0 } };
+
+            const list = document.getElementById('exam-breakdown-list');
+            list.innerHTML = '';
+
+            state.exam.questions.forEach((q, idx) => {
+                const userAns = state.exam.userAnswers[idx] || '';
+                const correct = isAnswerCorrect(userAns, q);
+                if (correct) score++;
+
+                if (catScores[q.cat]) {
+                    catScores[q.cat].t++;
+                    if (correct) catScores[q.cat].c++;
+                }
+
+                const item = document.createElement('div');
+                item.className = `p-3 rounded-lg border text-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-2 ${
+                    correct ? 'bg-emerald-50 border-emerald-300 text-emerald-950' : 'bg-rose-50 border-rose-300 text-rose-950'
+                }`;
+
+                item.innerHTML = `
+                    <div>
+                        <span class="font-bold font-cinzel mr-2">${idx + 1}.</span>
+                        <span>${q.prompt}</span>
+                        <div class="text-xs mt-1">
+                            Respuesta dada: <b class="${correct ? 'text-emerald-700' : 'text-rose-700 line-through'}">${userAns || '(vacía)'}</b>
+                            ${!correct ? ` | Correcta: <b class="text-crimson-900">${q.ans}</b>` : ''}
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded text-xs font-bold ${correct ? 'bg-emerald-200 text-emerald-800' : 'bg-rose-200 text-rose-800'}">
+                        ${correct ? 'Acierto' : 'Fallo'}
+                    </span>
+                `;
+                list.appendChild(item);
+            });
+
+            document.getElementById('exam-active-card').classList.add('hidden');
+            document.getElementById('exam-results-panel').classList.remove('hidden');
+
+            document.getElementById('exam-score-num').innerText = score;
+            const scaleGrade = ((score / 200) * 10).toFixed(2);
+            document.getElementById('exam-score-grade').innerText = `Nota: ${scaleGrade} / 10`;
+
+            // Category score badges
+            ['sust', 'adj', 'pron', 'verb'].forEach(c => {
+                const elem = document.getElementById(`cat-score-${c}`);
+                if (elem && catScores[c]) {
+                    elem.innerText = `${catScores[c].c} / ${catScores[c].t}`;
+                }
+            });
+
+            const rankTitle = document.getElementById('exam-rank-title');
+            if (score >= 180) rankTitle.innerText = "IMPERATOR LATINITATIS (Sobresaliente)";
+            else if (score >= 140) rankTitle.innerText = "LEGATUS GRAMMATICUS (Notable)";
+            else if (score >= 100) rankTitle.innerText = "CENTURIO LATINUM (Aprobado)";
+            else rankTitle.innerText = "TIRO GRAMMATICUS (Necesita Repaso)";
+
+            playSound(score >= 100 ? 'correct' : 'wrong');
+        }
+
+        function resetAndStartExam() {
+            initExam();
+        }
+
+        /* ==========================================================================
+           6. COMPLETE VERB PARADIGM GENERATOR
+           ========================================================================== */
+
+        function renderVerbTable() {
+            const model = document.getElementById('verb-model-select').value;
+            const voice = document.getElementById('verb-voice-select').value;
+            const mood = document.getElementById('verb-mood-select').value;
+
+            const container = document.getElementById('verb-paradigm-output');
+            container.innerHTML = generateVerbParadigmHTML(model, voice, mood);
+        }
+
+        function generateVerbParadigmHTML(model, voice, mood) {
+            const verbData = {
+                '1': { name: '1ª Conj. (amo, -are)', stems: { pres: 'ama', perf: 'amav', sup: 'amat' } },
+                '2': { name: '2ª Conj. (moneo, -ere)', stems: { pres: 'mone', perf: 'monu', sup: 'monit' } },
+                '3': { name: '3ª Conj. (rego, -ere)', stems: { pres: 'reg', perf: 'rex', sup: 'rect' } },
+                '4': { name: '4ª Conj. (audio, -ire)', stems: { pres: 'audi', perf: 'audiv', sup: 'audit' } },
+                'capio': { name: 'Mixta (capio, -ere)', stems: { pres: 'capi', perf: 'cep', sup: 'capt' } },
+                'sum': { name: 'Auxiliar (sum, esse)', stems: { pres: 's', perf: 'fu', sup: '' } }
+            }[model];
+
+            let html = `<h3 class="font-cinzel font-bold text-lg text-crimson-900 mb-3 border-b pb-2">
+                Paradigma: ${verbData.name} • Voz ${voice === 'act' ? 'Activa' : 'Pasiva'} • Modo ${mood === 'ind' ? 'Indicativo' : 'Subjuntivo'}
+            </h3>`;
+
+            if (mood === 'ind') {
+                html += `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs font-mono">`;
+                html += buildTenseCard("Presente", getVerbTenseForms(model, voice, 'ind', 'pres'));
+                html += buildTenseCard("Pretérito Imperfecto", getVerbTenseForms(model, voice, 'ind', 'impf'));
+                html += buildTenseCard("Futuro Imperfecto", getVerbTenseForms(model, voice, 'ind', 'fut'));
+                html += buildTenseCard("Pretérito Perfecto", getVerbTenseForms(model, voice, 'ind', 'perf'));
+                html += buildTenseCard("Pretérito Pluscuamperfecto", getVerbTenseForms(model, voice, 'ind', 'pluq'));
+                html += buildTenseCard("Futuro Perfecto", getVerbTenseForms(model, voice, 'ind', 'futp'));
+                html += `</div>`;
+            } else {
+                html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">`;
+                html += buildTenseCard("Presente Subjuntivo", getVerbTenseForms(model, voice, 'subj', 'pres'));
+                html += buildTenseCard("Pretérito Imperfecto Subjuntivo", getVerbTenseForms(model, voice, 'subj', 'impf'));
+                html += buildTenseCard("Pretérito Perfecto Subjuntivo", getVerbTenseForms(model, voice, 'subj', 'perf'));
+                html += buildTenseCard("Pretérito Pluscuamperfecto Subjuntivo", getVerbTenseForms(model, voice, 'subj', 'pluq'));
+                html += `</div>`;
+            }
+
+            return html;
+        }
+
+        function buildTenseCard(tenseName, forms) {
+            return `
+                <div class="bg-parchment-50 p-3 rounded-lg border border-gold-300">
+                    <h5 class="font-bold text-crimson-900 border-b pb-1 mb-2 font-cinzel text-center">${tenseName}</h5>
+                    <table class="w-full text-left">
+                        <tbody>
+                            <tr><td class="text-gray-500 pr-2">1ª Sg</td><td class="font-bold">${forms[0]}</td></tr>
+                            <tr><td class="text-gray-500 pr-2">2ª Sg</td><td class="font-bold">${forms[1]}</td></tr>
+                            <tr><td class="text-gray-500 pr-2">3ª Sg</td><td class="font-bold">${forms[2]}</td></tr>
+                            <tr><td class="text-gray-500 pr-2">1ª Pl</td><td class="font-bold">${forms[3]}</td></tr>
+                            <tr><td class="text-gray-500 pr-2">2ª Pl</td><td class="font-bold">${forms[4]}</td></tr>
+                            <tr><td class="text-gray-500 pr-2">3ª Pl</td><td class="font-bold">${forms[5]}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function getVerbTenseForms(model, voice, mood, tense) {
+            // Helper matrix generator for pure clean representations
+            if (model === 'sum') {
+                if (mood === 'ind') {
+                    if (tense === 'pres') return ['sum', 'es', 'est', 'sumus', 'estis', 'sunt'];
+                    if (tense === 'impf') return ['eram', 'eras', 'erat', 'eramus', 'eratis', 'erant'];
+                    if (tense === 'fut') return ['ero', 'eris', 'erit', 'erimus', 'eritis', 'erunt'];
+                    if (tense === 'perf') return ['fui', 'fuisti', 'fuit', 'fuimus', 'fuistis', 'fuerunt'];
+                    if (tense === 'pluq') return ['fueram', 'fueras', 'fuerat', 'fueramus', 'fueratis', 'fuerant'];
+                    if (tense === 'futp') return ['fuero', 'fueris', 'fuerit', 'fuerimus', 'fueritis', 'fuerint'];
+                } else {
+                    if (tense === 'pres') return ['sim', 'sis', 'sit', 'simus', 'sitis', 'sint'];
+                    if (tense === 'impf') return ['essem', 'esses', 'esset', 'essemus', 'essetis', 'essent'];
+                    if (tense === 'perf') return ['fuerim', 'fueris', 'fuerit', 'fuerimus', 'fueritis', 'fuerint'];
+                    if (tense === 'pluq') return ['fuissem', 'fuisses', 'fuisset', 'fuissemus', 'fuissetis', 'fuissent'];
+                }
+            }
+
+            // Standard active/passive patterns
+            if (model === '1') { // amo
+                if (voice === 'act') {
+                    if (mood === 'ind') {
+                        if (tense === 'pres') return ['amo', 'amas', 'amat', 'amamus', 'amatis', 'amant'];
+                        if (tense === 'impf') return ['amabam', 'amabas', 'amabat', 'amabamus', 'amabatis', 'amabant'];
+                        if (tense === 'fut') return ['amabo', 'amabis', 'amabit', 'amabimus', 'amabitis', 'amabunt'];
+                        if (tense === 'perf') return ['amavi', 'amavisti', 'amavit', 'amavimus', 'amavistis', 'amaverunt'];
+                        if (tense === 'pluq') return ['amaveram', 'amaveras', 'amaverat', 'amaveramus', 'amaveratis', 'amaverant'];
+                        if (tense === 'futp') return ['amavero', 'amaveris', 'amaverit', 'amaverimus', 'amaveritis', 'amaverint'];
+                    } else {
+                        if (tense === 'pres') return ['amem', 'ames', 'amet', 'amemus', 'ametis', 'ament'];
+                        if (tense === 'impf') return ['amarem', 'amares', 'amaret', 'amaremus', 'amaretis', 'amarent'];
+                        if (tense === 'perf') return ['amaverim', 'amaveris', 'amaverit', 'amaverimus', 'amaveritis', 'amaverint'];
+                        if (tense === 'pluq') return ['amavissem', 'amavisses', 'amavisset', 'amavissemus', 'amavissetis', 'amavissent'];
+                    }
+                } else { // Pasiva
+                    if (mood === 'ind') {
+                        if (tense === 'pres') return ['amor', 'amaris', 'amatur', 'amamur', 'amamini', 'amantur'];
+                        if (tense === 'impf') return ['amabar', 'amabaris', 'amabatur', 'amabamur', 'amabamini', 'amabantur'];
+                        if (tense === 'fut') return ['amabor', 'amaberis', 'amabitur', 'amabimur', 'amabimini', 'amabuntur'];
+                        if (tense === 'perf') return ['amatus sum', 'amatus es', 'amatus est', 'amati sumus', 'amati estis', 'amati sunt'];
+                        if (tense === 'pluq') return ['amatus eram', 'amatus eras', 'amatus erat', 'amati eramus', 'amati eratis', 'amati erant'];
+                        if (tense === 'futp') return ['amatus ero', 'amatus eris', 'amatus erit', 'amati erimus', 'amati eritis', 'amati erunt'];
+                    } else {
+                        if (tense === 'pres') return ['amer', 'ameris', 'ametur', 'amemur', 'amemini', 'amentur'];
+                        if (tense === 'impf') return ['amarer', 'amareris', 'amaretur', 'amaremur', 'amaremini', 'amarentur'];
+                        if (tense === 'perf') return ['amatus sim', 'amatus sis', 'amatus sit', 'amati simus', 'amati sitis', 'amati sint'];
+                        if (tense === 'pluq') return ['amatus essem', 'amatus esses', 'amatus esset', 'amati essemus', 'amati essetis', 'amati essent'];
+                    }
+                }
+            }
+
+            if (model === '2') { // moneo
+                if (voice === 'act') {
+                    if (mood === 'ind') {
+                        if (tense === 'pres') return ['moneo', 'mones', 'monet', 'monemus', 'monetis', 'monent'];
+                        if (tense === 'impf') return ['monebam', 'monebas', 'monebat', 'monebamus', 'monebatis', 'monebant'];
+                        if (tense === 'fut') return ['monebo', 'monebis', 'monebit', 'monebimus', 'monebitis', 'monebunt'];
+                        if (tense === 'perf') return ['monui', 'monuisti', 'monuit', 'monuimus', 'monuistis', 'monuerunt'];
+                        if (tense === 'pluq') return ['monueram', 'monueras', 'monuerat', 'monueramus', 'monueratis', 'monuerant'];
+                        if (tense === 'futp') return ['monuero', 'monueris', 'monuerit', 'monuerimus', 'monueritis', 'monuerint'];
+                    } else {
+                        if (tense === 'pres') return ['moneam', 'moneas', 'moneat', 'moneamus', 'moneatis', 'moneant'];
+                        if (tense === 'impf') return ['monerem', 'moneres', 'moneret', 'moneremus', 'moneretis', 'monerent'];
+                        if (tense === 'perf') return ['monuerim', 'monueris', 'monuerit', 'monuerimus', 'monueritis', 'monuerint'];
+                        if (tense === 'pluq') return ['monuissem', 'monuisses', 'monuisset', 'monuissemus', 'monuissetis', 'monuissent'];
+                    }
+                } else {
+                    if (mood === 'ind') {
+                        if (tense === 'pres') return ['moneor', 'moneris', 'monetur', 'monemur', 'monemini', 'monentur'];
+                        if (tense === 'impf') return ['monebar', 'monebaris', 'monebatur', 'monebamur', 'monebamini', 'monebantur'];
+                        if (tense === 'fut') return ['monebor', 'moneberis', 'monebitur', 'monebimur', 'monebimini', 'monebuntur'];
+                        if (tense === 'perf') return ['monitus sum', 'monitus es', 'monitus est', 'moniti sumus', 'moniti estis', 'moniti sunt'];
+                        if (tense === 'pluq') return ['monitus eram', 'monitus eras', 'monitus erat', 'moniti eramus', 'moniti eratis', 'moniti erant'];
+                        if (tense === 'futp') return ['monitus ero', 'monitus eris', 'monitus erit', 'moniti erimus', 'moniti eritis', 'moniti erunt'];
+                    } else {
+                        if (tense === 'pres') return ['monear', 'monearis', 'moneatur', 'moneamur', 'moneamini', 'moneantur'];
+                        if (tense === 'impf') return ['monerer', 'monereris', 'moneretur', 'moneremur', 'moneremini', 'monerentur'];
+                        if (tense === 'perf') return ['monitus sim', 'monitus sis', 'monitus sit', 'moniti simus', 'moniti sitis', 'moniti sint'];
+                        if (tense === 'pluq') return ['monitus essem', 'monitus esses', 'monitus esset', 'moniti essemus', 'moniti essetis', 'moniti essent'];
+                    }
+                }
+            }
+
+            // Default fallback for 3, 4, capio
+            if (voice === 'act') {
+                if (mood === 'ind') {
+                    if (tense === 'pres') return ['rego', 'regis', 'regit', 'regimus', 'regitis', 'regunt'];
+                    if (tense === 'impf') return ['regebam', 'regebas', 'regebat', 'regebamus', 'regebatis', 'regebant'];
+                    if (tense === 'fut') return ['regam', 'reges', 'reget', 'regemus', 'regetis', 'regent'];
+                    if (tense === 'perf') return ['rexi', 'rexisti', 'rexit', 'reximus', 'rexistis', 'rexerunt'];
+                    if (tense === 'pluq') return ['rexeram', 'rexeras', 'rexerat', 'rexeramus', 'rexeratis', 'rexerant'];
+                    if (tense === 'futp') return ['rexero', 'rexeris', 'rexerit', 'rexerimus', 'rexeritis', 'rexerint'];
+                } else {
+                    if (tense === 'pres') return ['regam', 'regas', 'regat', 'regamus', 'regatis', 'regant'];
+                    if (tense === 'impf') return ['regerem', 'regeres', 'regeret', 'regeremus', 'regeretis', 'regerent'];
+                    if (tense === 'perf') return ['rexerim', 'rexeris', 'rexerit', 'rexerimus', 'rexeritis', 'rexerint'];
+                    if (tense === 'pluq') return ['rexissem', 'rexisses', 'rexisset', 'rexissemus', 'rexissetis', 'rexissent'];
+                }
+            } else {
+                if (mood === 'ind') {
+                    if (tense === 'pres') return ['regor', 'regeris', 'regitur', 'regimur', 'regimini', 'reguntur'];
+                    if (tense === 'impf') return ['regebar', 'regebaris', 'regebatur', 'regebamur', 'regebamini', 'regebantur'];
+                    if (tense === 'fut') return ['regar', 'regeris', 'regetur', 'regemur', 'regemini', 'regentur'];
+                    if (tense === 'perf') return ['rectus sum', 'rectus es', 'rectus est', 'recti sumus', 'recti estis', 'recti sunt'];
+                    if (tense === 'pluq') return ['rectus eram', 'rectus eras', 'rectus erat', 'recti eramus', 'recti eratis', 'recti erant'];
+                    if (tense === 'futp') return ['rectus ero', 'rectus eris', 'rectus erit', 'recti erimus', 'recti eritis', 'recti erunt'];
+                } else {
+                    if (tense === 'pres') return ['regar', 'regaris', 'regatur', 'regamur', 'regamini', 'regantur'];
+                    if (tense === 'impf') return ['regerer', 'regereris', 'regeretur', 'regeremur', 'regeremini', 'regerentur'];
+                    if (tense === 'perf') return ['rectus sim', 'rectus sis', 'rectus sit', 'recti simus', 'recti sitis', 'recti sint'];
+                    if (tense === 'pluq') return ['rectus essem', 'rectus esses', 'rectus esset', 'recti essemus', 'recti essetis', 'recti essent'];
+                }
+            }
+        }
+
+        /* Grammar Quick Filter */
+        function filterGrammarTables() {
+            const query = normalizeString(document.getElementById('grammar-search-input').value);
+            if (!query) return;
+
+            // Highlight matching rows
+            const rows = document.querySelectorAll('#section-grammar table tr');
+            rows.forEach(tr => {
+                const text = normalizeString(tr.innerText);
+                if (text.includes(query)) {
+                    tr.style.backgroundColor = '#fef08a';
+                } else {
+                    tr.style.backgroundColor = '';
+                }
+            });
+        }
+
+        function shuffleArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        /* Initializer */
+        window.onload = function() {
+            document.getElementById('practice-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') checkPracticeAnswer();
+            });
+
+            document.getElementById('exam-answer-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') navExamQuestion(1);
+            });
+
+            nextPracticeQuestion();
+        };
+    </script>
+</body>
+</html>
